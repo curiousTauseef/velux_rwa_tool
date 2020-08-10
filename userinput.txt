@@ -1,0 +1,8 @@
+
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
+{"pname": "", "buildingsAboveParking": "typeRegular", "buildingClass": "laag", "nrLayers": "mezzanineLayered", "smoke_compts": "0"}
