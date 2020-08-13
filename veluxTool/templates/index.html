@@ -177,15 +177,15 @@
                             <div class="help-tip" tabindex="0" role="button" href="javascript:void(0);" data-trigger="hover focus" data-toggle="popover" data-placement="top" data-content="Enter a project name in the box">?</div>    
                         </label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="pname" name="pname" placeholder="project name (e.g., django)">                                
+                            <input type="text" class="form-control" id="pname" name="ProjectName" placeholder="project name (e.g., django)">                                
                         </div>
                     </div>
 
 
-                    <div id="gebouwenBovenParking" class="input-group form-inline mt-2">
+                    <div class="input-group form-inline mt-2">
                         <label class="control-label col-md-3">Building Type</label>
                         <div class="col-md-3">
-                            <select class="form-control" id="buildingType" name="buildingsAboveParking">
+                            <select class="form-control" id="buildingType" name="BuildingType">
                                 <option value="typeRegular" selected="">Regular</option>
                                 <option value="typeIndustry">Industry</option>
                             </select>
@@ -198,6 +198,7 @@
                         </label>
                         <div class="col-md-3">
                             <select class="form-control" id="buildingClass" name="buildingClass">
+                                <option value="0" selected="">-- Choose One --</option>
                                 <option value="laag">A   (Difficult to burn)</option>
                                 <option value="mid">B   (Burns moderately)</option>
                                 <option value="hoog">C   (Burns easily)</option>
@@ -210,7 +211,7 @@
                         <div class="help-tip" tabindex="0" role="button" href="javascript:void(0);" data-trigger="hover focus" data-toggle="popover" data-placement="top" data-content="Only if the building has no mezzanine, choose yes. Else choose no.">?</div> 
                         </label>
                         <div class="col-md-3">
-                            <select class="form-control" id="nrLayers" name="nrLayers">
+                            <select class="form-control" id="nrLayers" name="MultilayeredBuilding">
                                 <option value="mezzanineLayered" selected="">No</option>
                                 <option value="singleLayered">Yes</option>
                             </select>
@@ -238,11 +239,11 @@
                                 <div class="card-header">    Smoke compartment 1  </div>
                                 <div class="card-body">
                                     <p id="ug1" class="card-text">Fill up with inputs below for compartment 1.</p>
-                                    <h5>Inputs</h2>
+                                    
                                         <div class="input-group form-inline mt-2">
                                             <label class="control-label col-md-3">Occupancy</label>
-                                            <div class="col-md-4">
-                                                <select class="form-control" id="sc1_occupancy_list" name="sc1_occupancy">
+                                            <div class="col-md-3">
+                                                <select class="form-control" id="sc_occupancy_list1" name="compartment1 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
                                                     <optgroup label="lage brandbelasting">
                                                         <option value="badhuizen">badhuizen (openbare)</option>
@@ -264,19 +265,19 @@
                                                                     <label for="another-input">Circumference</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Circumference" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Area</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Area" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Size</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
                                             </div>
                                         
@@ -291,11 +292,11 @@
                                 <div class="card-header">    Smoke compartment 2  </div>
                                 <div class="card-body">
                                     <p id="ug2" class="card-text">Fill up with inputs below for compartment 2.</p>
-                                    <h5>Inputs</h2>
+                                    
                                         <div class="input-group form-inline mt-2">
                                             <label class="control-label col-md-3">Occupancy</label>
                                             <div class="col-md-4">
-                                                <select class="form-control" id="sc2_occupancy_list" name="sc2_occupancy">
+                                                <select class="form-control" id="sc_occupancy_list2" name="compartment2 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
                                                     <optgroup label="lage brandbelasting">
                                                         <option value="badhuizen">badhuizen (openbare)</option>
@@ -317,21 +318,22 @@
                                                                     <label for="another-input">Circumference</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Circumference" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Area</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Area" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Size</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
                                             </div>
+                                        
                                         </div>
 
                                 </div>
@@ -343,11 +345,11 @@
                                 <div class="card-header">    Smoke compartment 3  </div>
                                 <div class="card-body">
                                     <p id="ug3" class="card-text">Fill up with details for compartment 3.</p>
-                                    <h5>Inputs</h2>
+                                    
                                         <div class="input-group form-inline mt-2">
                                             <label class="control-label col-md-3">Occupancy</label>
                                             <div class="col-md-4">
-                                                <select class="form-control" id="sc3_occupancy_list" name="sc3_occupancy">
+                                                <select class="form-control" id="sc_occupancy_list3" name="compartment3 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
                                                     <optgroup label="lage brandbelasting">
                                                         <option value="badhuizen">badhuizen (openbare)</option>
@@ -370,19 +372,19 @@
                                                                     <label for="another-input">Circumference</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Circumference" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Area</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Area" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
                                                             </div>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Fire Size</label>
                                                             </div>
                                                             <div class="col-sm-2">
-                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                                <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
                                             </div>
                                         
@@ -408,8 +410,7 @@
                         <button id="ventCalculation" type="submit" class="btn btn-primary">Show vent details</button>
 
                         <button id="pdfSave" type="submit" class="btn btn-primary">Save results(PDF)</button>
-
-                        <button id="cmd">Generate PDF</button>
+                        
                     </div>
 
 
