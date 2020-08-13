@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>FESG wep app</title>
+    <title>Velux RWA Tool</title>
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     {% load static %}
@@ -18,6 +18,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
     <style>
         #box_licenseText { display: none; }
         #box_navigationbar { display: none; }
@@ -94,6 +95,26 @@
                 max-width: 500px;
             }
 
+
+
+        .page-break {
+            page-break-after: always;
+            page-break-inside: avoid;
+            clear:both;
+        }
+        .page-break-before {
+            page-break-before: always;
+            page-break-inside: avoid;
+            clear:both;
+        }
+       #labelug1{
+            position: absolute; 
+            left: 20px; 
+            top: 50px; 
+            bottom: 0; 
+            overflow: auto; 
+            width: 600px;
+       }
     </style>
 </head>
 
@@ -216,7 +237,52 @@
                             <div id="labelug1 class="card">
                                 <div class="card-header">    Smoke compartment 1  </div>
                                 <div class="card-body">
-                                    <p id="ug1" class="card-text">Fill up with details for compartment 1.</p>
+                                    <p id="ug1" class="card-text">Fill up with inputs below for compartment 1.</p>
+                                    <h5>Inputs</h2>
+                                        <div class="input-group form-inline mt-2">
+                                            <label class="control-label col-md-3">Occupancy</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" id="sc1_occupancy_list" name="sc1_occupancy">
+                                                    <option value="base"> Select a occupancy type</option>
+                                                    <optgroup label="lage brandbelasting">
+                                                        <option value="badhuizen">badhuizen (openbare)</option>
+                                                        <option value="boekerijen">boekerijen</option>
+
+                                                    </optgroup>
+                                                    <optgroup label="normale brandbelasting N1"> 
+                                                        <option value="Accumulatorenstations">Accumulatorenstations</option>                             
+                                                        <option value="Beton">Beton</option>
+                                                    </optgroup>   
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="sc1display" >
+                                            <div class="form-group row flex-v-center" pt-1>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Circumference</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Area</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Size</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                            </div>
+                                        
+                                        </div>
+
+
                                 </div>
                             </div>
                        
@@ -224,7 +290,50 @@
                             <div id="labelug2" class="card">
                                 <div class="card-header">    Smoke compartment 2  </div>
                                 <div class="card-body">
-                                    <p id="ug2" class="card-text">Fill up with details for compartment 2.</p>
+                                    <p id="ug2" class="card-text">Fill up with inputs below for compartment 2.</p>
+                                    <h5>Inputs</h2>
+                                        <div class="input-group form-inline mt-2">
+                                            <label class="control-label col-md-3">Occupancy</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" id="sc2_occupancy_list" name="sc2_occupancy">
+                                                    <option value="base"> Select a occupancy type</option>
+                                                    <optgroup label="lage brandbelasting">
+                                                        <option value="badhuizen">badhuizen (openbare)</option>
+                                                        <option value="boekerijen">boekerijen</option>
+
+                                                    </optgroup>
+                                                    <optgroup label="normale brandbelasting N1"> 
+                                                        <option value="Accumulatorenstations">Accumulatorenstations</option>                             
+                                                        <option value="Beton">Beton</option>
+                                                    </optgroup>   
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div id="sc2display" >
+                                            <div class="form-group row flex-v-center" pt-1>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Circumference</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Area</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Size</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                            </div>
+                                        </div>
+
                                 </div>
                             </div>
 
@@ -234,6 +343,52 @@
                                 <div class="card-header">    Smoke compartment 3  </div>
                                 <div class="card-body">
                                     <p id="ug3" class="card-text">Fill up with details for compartment 3.</p>
+                                    <h5>Inputs</h2>
+                                        <div class="input-group form-inline mt-2">
+                                            <label class="control-label col-md-3">Occupancy</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" id="sc3_occupancy_list" name="sc3_occupancy">
+                                                    <option value="base"> Select a occupancy type</option>
+                                                    <optgroup label="lage brandbelasting">
+                                                        <option value="badhuizen">badhuizen (openbare)</option>
+                                                        <option value="boekerijen">boekerijen</option>
+
+                                                    </optgroup>
+                                                    <optgroup label="normale brandbelasting N1"> 
+                                                        <option value="Accumulatorenstations">Accumulatorenstations</option>                             
+                                                        <option value="Beton">Beton</option>
+                                                    </optgroup>   
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div id="sc3display" >
+                                            <div class="form-group row flex-v-center" pt-1>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Circumference</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Area</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Size</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                            </div>
+                                        
+                                        </div>
+
+
                                 </div>
                             </div>
 
@@ -243,33 +398,40 @@
 
 
 
-
+                </form>
 
 
 
                     <h2 class="mt-5 pt-3">Options</h2>
 
                     <div class="text-center mt-5">
-                        <button id="submit" type="submit" class="btn btn-primary">Show options</button>
+                        <button id="ventCalculation" type="submit" class="btn btn-primary">Show vent details</button>
 
-                        <button id="submit" type="submit" class="btn btn-primary">Save results(PDF)</button>
+                        <button id="pdfSave" type="submit" class="btn btn-primary">Save results(PDF)</button>
+
+                        <button id="cmd">Generate PDF</button>
                     </div>
 
 
 
 
                     <div id="submit-success" class="alert alert-success mt-3" style="display:none;">Thank you. Your inputs have been submitted. Results will be sent to you by e-mail.</div>
-                </form>
+                
             </div>  
         </div>
     </div>
 
 
 
-    <script  src="{% static "veluxTool/main.js" %}"></script>
+    <script  src="{% static "veluxTool/mainnew.js" %}"></script>
        
     <script type="text/javascript" src="{% static "veluxTool/jsxgraphcore.js" %}"></script>
-    <script  src="{% static "veluxTool/ajaxhandling.js" %}"></script>
+    
+    
+    <script  type="module" src="{% static "veluxTool/jspdf.min.js" %}"></script>
+
+    
+    <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
 </body>
 
 </html>
