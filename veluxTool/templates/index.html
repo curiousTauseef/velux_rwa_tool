@@ -197,7 +197,7 @@
                             <div class="help-tip" tabindex="0" role="button" href="javascript:void(0);" data-trigger="hover focus" data-toggle="popover" data-placement="top" data-content="Choose from 3 choices based on the inflammability of the material kept in the building.">?</div>    
                         </label>
                         <div class="col-md-3">
-                            <select class="form-control" id="buildingClass" name="buildingClass">
+                            <select class="form-control" id="buildingClass" name="BuildingClass">
                                 <option value="0" selected="">-- Choose One --</option>
                                 <option value="laag">A   (Difficult to burn)</option>
                                 <option value="mid">B   (Burns moderately)</option>
@@ -245,14 +245,21 @@
                                             <div class="col-md-3">
                                                 <select class="form-control" id="sc_occupancy_list1" name="compartment1 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
-                                                    <optgroup label="lage brandbelasting">
-                                                        <option value="badhuizen">badhuizen (openbare)</option>
-                                                        <option value="boekerijen">boekerijen</option>
+                                                    <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
+                                                        <option value="Badhuizen">Badhuizen (openbare)</option>
+                                                        <option value="Boekerijen">Boekerijen</option>
+                                                        <option value="Gevangenissen">Gevangenissen</option>
 
                                                     </optgroup>
-                                                    <optgroup label="normale brandbelasting N1"> 
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting met een laag brandgevaar(N1)"> 
                                                         <option value="Accumulatorenstations">Accumulatorenstations</option>                             
                                                         <option value="Beton">Beton</option>
+                                                        <option value="Bewerking-tot-schuimwijn">Bewerking tot schuimwijn</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een normale brandgevaar(N2)"> 
+                                                        <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
+                                                        <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
+                                                        <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
                                                     </optgroup>   
                                                 </select>
                                             </div>
@@ -298,15 +305,22 @@
                                             <div class="col-md-4">
                                                 <select class="form-control" id="sc_occupancy_list2" name="compartment2 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
-                                                    <optgroup label="lage brandbelasting">
-                                                        <option value="badhuizen">badhuizen (openbare)</option>
-                                                        <option value="boekerijen">boekerijen</option>
+                                                    <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
+                                                        <option value="Badhuizen">Badhuizen (openbare)</option>
+                                                        <option value="Boekerijen">Boekerijen</option>
+                                                        <option value="Gevangenissen">Gevangenissen</option>
 
                                                     </optgroup>
-                                                    <optgroup label="normale brandbelasting N1"> 
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting met een laag brandgevaar(N1)"> 
                                                         <option value="Accumulatorenstations">Accumulatorenstations</option>                             
                                                         <option value="Beton">Beton</option>
-                                                    </optgroup>   
+                                                        <option value="Bewerking-tot-schuimwijn">Bewerking tot schuimwijn</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een normale brandgevaar(N2)"> 
+                                                        <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
+                                                        <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
+                                                        <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
+                                                    </optgroup>    
                                                 </select>
                                             </div>
                                         </div>
@@ -351,15 +365,22 @@
                                             <div class="col-md-4">
                                                 <select class="form-control" id="sc_occupancy_list3" name="compartment3 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
-                                                    <optgroup label="lage brandbelasting">
-                                                        <option value="badhuizen">badhuizen (openbare)</option>
-                                                        <option value="boekerijen">boekerijen</option>
+                                                    <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
+                                                        <option value="Badhuizen">Badhuizen (openbare)</option>
+                                                        <option value="Boekerijen">Boekerijen</option>
+                                                        <option value="Gevangenissen">Gevangenissen</option>
 
                                                     </optgroup>
-                                                    <optgroup label="normale brandbelasting N1"> 
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting met een laag brandgevaar(N1)"> 
                                                         <option value="Accumulatorenstations">Accumulatorenstations</option>                             
                                                         <option value="Beton">Beton</option>
-                                                    </optgroup>   
+                                                        <option value="Bewerking-tot-schuimwijn">Bewerking tot schuimwijn</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een normale brandgevaar(N2)"> 
+                                                        <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
+                                                        <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
+                                                        <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
+                                                    </optgroup>     
                                                 </select>
                                             </div>
                                         </div>

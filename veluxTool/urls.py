@@ -11,7 +11,6 @@ app_name = "veluxTool"
 urlpatterns = [
     path('', views.index, name='index'),
     #path('', include('accounts.urls')),
-    path('pdf/', views.GeneratePdf.as_view()),
     #path('tag/', views.get_message_print_tag, name='get_message_print_tag'),
     
 ]

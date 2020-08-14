@@ -13,17 +13,6 @@ import datetime
 from django import template
 #register = template.Library()
 
-class GeneratePdf(View):
-    def get(self, request, *args, **kwargs):
-        data = {
-             'today': datetime.date.today(), 
-             'amount': 39.99,
-            'customer_name': 'Cooper Mann',
-            'order_id': 1233434,
-        }
-        pdf = render_to_pdf('invoice.html', data)
-        return HttpResponse(pdf, content_type='application/pdf')
-
 #@register.simple_tag(name='new_tag')
 #def new_tag(request):
 #    print("\nCame here via a HTML tag")
