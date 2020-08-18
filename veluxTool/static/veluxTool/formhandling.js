@@ -8,6 +8,60 @@ $(document).ready(function () {
     // reference to selected option
     var buildingTypeOpt = buildingType.options[buildingType.selectedIndex];
 
+    (function(API) {
+		API.textAlign = function(txt, options, x, y) {
+				options = options || {};
+				// Use the options align property to specify desired text alignment
+				// Param x will be ignored if desired text alignment is 'center'.
+				// Usage of options can easily extend the function to apply different text
+				// styles and sizes
+
+				// Get current font size
+				var fontSize = this.internal.getFontSize();
+
+				// Get page width
+				var pageWidth = this.internal.pageSize.width;
+
+				// Get the actual text's width
+				// You multiply the unit width of your string by your font size and divide
+				// by the internal scale factor. The division is necessary
+				// for the case where you use units other than 'pt' in the constructor
+				// of jsPDF.
+
+				var txtWidth = this.getStringUnitWidth(txt) * fontSize / this.internal.scaleFactor;
+
+				if (options.align === "center") {
+
+						// Calculate text's x coordinate
+						x = (pageWidth - txtWidth) / 2;
+
+				} else if (options.align === "centerAtX") { // center on X value
+
+						x = x - (txtWidth / 2);
+
+				} else if (options.align === "right") {
+
+						x = x - txtWidth;
+				}
+
+				// Draw text at x,y
+				this.text(txt, x, y);
+		};
+		/*
+		    API.textWidth = function(txt) {
+			    var fontSize = this.internal.getFontSize();
+		        return this.getStringUnitWidth(txt)*fontSize / this.internal.scaleFactor;
+		    };
+		*/
+
+		API.getLineHeight = function(txt) {
+				return this.internal.getLineHeight();
+		};
+
+    })(jsPDF.API);
+
+
+
     $(document).on('change', '#smoke_compts', () => {
         updateSmokeCompts();
     });
@@ -58,7 +112,6 @@ $(document).ready(function () {
        }
     }
 
-
     function updateSCResults() {
         var i;
 
@@ -104,6 +157,8 @@ $(document).ready(function () {
     }); //ventCalculation ends
     */
 
+    //On selection of occupancy for any of the smoke compartments, results of categories are to be displayed.
+    //Rather than button click, user selection changes the results.
     $(document).on('change', '#sc_occupancy_list1', () => {
         updateSCResults(1);
     });
@@ -120,17 +175,24 @@ $(document).ready(function () {
 
     $('#pdfSave').click(function (event) {
         var doc = new jsPDF();
-        doc.text(20, 20, 'Velux tool for calculating ventilation of buildings. Your results are below!');
+        //doc.text(20, 20, 'Velux tool for calculating ventilation of buildings. Your results are below!');
         var j=30;
         var indSelect=0;
 
-        var newLine = "\r\n"
+        var newLine = "\r\n";
+
+        var veluxtool_title = "Velux Tool";
+
+        doc.textAlign(veluxtool_title, {
+            align: "center"
+        }, 0, 15);
+
         $('#calcformnew input, #calcformnew select').each(function(){
         
             var input = $(this);
             var s = $(this);
            
-            if( !(typeof input.attr('name') === 'undefined')  ){
+           // if( !(typeof input.attr('name') === 'undefined')  ){
                 
                 //if(input.tagName === 'INPUT' && input.type === 'text') {
                 if(input.is('input') && !( input.val().trim() ===("").valueOf() )  ) {
@@ -154,7 +216,7 @@ $(document).ready(function () {
                     }
              
                 }
-            }
+           // }
   
             //j=j+1;
             //n=n+1;
@@ -164,12 +226,6 @@ $(document).ready(function () {
         event.preventDefault();
 
     }); //cmd ends
-
-
-
-    
-
-
 
         
 }); //document ready ends

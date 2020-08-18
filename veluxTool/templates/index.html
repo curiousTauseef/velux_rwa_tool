@@ -231,79 +231,20 @@
                         </div>
                     </div>
 
-
-
-                    <div id ="smokecompt" class="row pt-3">
+                    <div id ="smokecompt" class="row pt-3" >
                        
                             <div id="labelug1 class="card">
                                 <div class="card-header">    Smoke compartment 1  </div>
-                                <div class="card-body">
-                                    <p id="ug1" class="card-text">Fill up with inputs below for compartment 1.</p>
+                                <div class="card-body ">
+                                   
                                     
-                                        <div class="input-group form-inline mt-2">
-                                            <label class="control-label col-md-3">Occupancy</label>
-                                            <div class="col-md-3">
-                                                <select class="form-control" id="sc_occupancy_list1" name="compartment1 occupancy">
-                                                    <option value="base"> Select a occupancy type</option>
-                                                    <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
-                                                        <option value="Badhuizen">Badhuizen (openbare)</option>
-                                                        <option value="Boekerijen">Boekerijen</option>
-                                                        <option value="Gevangenissen">Gevangenissen</option>
+                                    <!--borrow from https://www.codeply.com/go/ouF4wvC2uU-->
+                                    <form class="form" role="form" autocomplete="off">
+                                        <div class="form-group row">
 
-                                                    </optgroup>
-                                                    <optgroup label="Inrinchtingen met een normale brandbelasting met een laag brandgevaar(N1)"> 
-                                                        <option value="Accumulatorenstations">Accumulatorenstations</option>                             
-                                                        <option value="Beton">Beton</option>
-                                                        <option value="Bewerking-tot-schuimwijn">Bewerking tot schuimwijn</option>
-                                                    </optgroup>
-                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een normale brandgevaar(N2)"> 
-                                                        <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
-                                                        <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
-                                                        <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
-                                                    </optgroup>   
-                                                </select>
-                                            </div>
-                                        </div>
-
-
-                                        <div id="sc1display" >
-                                            <div class="form-group row flex-v-center" pt-1>
-                                                            <div class="col-sm-2">
-                                                                    <label for="another-input">Circumference</label>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <input type="text" name="Circumference" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                    <label for="another-input">Fire Area</label>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <input type="text" name="Fire-Area" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                    <label for="another-input">Fire Size</label>
-                                                            </div>
-                                                            <div class="col-sm-2">
-                                                                <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
-                                                            </div>
-                                            </div>
-                                        
-                                        </div>
-
-
-                                </div>
-                            </div>
-                       
-                       
-                            <div id="labelug2" class="card">
-                                <div class="card-header">    Smoke compartment 2  </div>
-                                <div class="card-body">
-                                    <p id="ug2" class="card-text">Fill up with inputs below for compartment 2.</p>
-                                    
-                                        <div class="input-group form-inline mt-2">
                                             <label class="control-label col-md-3">Occupancy</label>
                                             <div class="col-md-4">
-                                                <select class="form-control" id="sc_occupancy_list2" name="compartment2 occupancy">
+                                                <select class="form-control" id="sc_occupancy_list1" name="compartment1 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
                                                     <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
                                                         <option value="Badhuizen">Badhuizen (openbare)</option>
@@ -323,11 +264,11 @@
                                                     </optgroup>    
                                                 </select>
                                             </div>
-                                        </div>
 
+                                        </div> <!-- End of form group for select occupancy list-->
 
-                                        <div id="sc2display" >
-                                            <div class="form-group row flex-v-center" pt-1>
+                                       
+                                        <div id="sc1display" class="form-group row flex-v-center" pt-1>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Circumference</label>
                                                             </div>
@@ -346,11 +287,195 @@
                                                             <div class="col-sm-2">
                                                                 <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
+                                        </div> <!-- End of form group for select occupancy list-->
+
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3">Sprinklers</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" id="sprinklers_sc2" name="sprinklers">
+                                                    <option value="typeYes" selected="">Yes</option>
+                                                    <option value="typeNo">No</option>
+                                                </select>
                                             </div>
-                                        
                                         </div>
 
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Activation temperature sprinklers</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="acttemp_sc2" name="Activation temperature sprinklers" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Temperature of surroundings</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="envtemp_sc2" name="Temperature of surroundings" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="areavent_sc2" name="Area" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of vent</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Height of vent" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of highest air inlet</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="higthighairinlet_sc2" name="Height of highest air inlet" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">C_i</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="ci_sc2" name="C_i" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Desired smoke free height</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Desired smoke free height" type="text" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of smoke screen</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightsmkscrn_sc2" name="Height of smoke screen" type="text" >
+                                            </div>
+                                        </div>
+                                                              
+                                    </form>
+
                                 </div>
+                            </div>
+                       
+                       
+                            <div id="labelug2" class="card">
+                                <div class="card-header">    Smoke compartment 2  </div>
+                                <div class="card-body">
+                                    <p id="ug2" class="card-text">Fill up with inputs below for compartment 2.</p>
+                                    
+                                    <!--borrow from https://www.codeply.com/go/ouF4wvC2uU-->
+                                    <form class="form" role="form" autocomplete="off">
+                                        <div class="form-group row">
+
+                                            <label class="control-label col-md-3">Occupancy</label>
+                                            <div class="col-md-4">
+                                                <select class="form-control" id="sc_occupancy_list2" name="compartment3 occupancy">
+                                                    <option value="base"> Select a occupancy type</option>
+                                                    <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
+                                                        <option value="Badhuizen">Badhuizen (openbare)</option>
+                                                        <option value="Boekerijen">Boekerijen</option>
+                                                        <option value="Gevangenissen">Gevangenissen</option>
+
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting met een laag brandgevaar(N1)"> 
+                                                        <option value="Accumulatorenstations">Accumulatorenstations</option>                             
+                                                        <option value="Beton">Beton</option>
+                                                        <option value="Bewerking-tot-schuimwijn">Bewerking tot schuimwijn</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een normale brandgevaar(N2)"> 
+                                                        <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
+                                                        <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
+                                                        <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
+                                                    </optgroup>    
+                                                </select>
+                                            </div>
+
+                                        </div> <!-- End of form group for select occupancy list-->
+
+                                       
+                                        <div id="sc2display" class="form-group row flex-v-center" pt-1>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Circumference</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" name="Circumference" class="form-control" placeholder="Circumference" aria-label="Circumference" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Area</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" name="Fire-Area" class="form-control" placeholder="Fire Area" aria-label="Fire Area" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                    <label for="another-input">Fire Size</label>
+                                                            </div>
+                                                            <div class="col-sm-2">
+                                                                <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
+                                                            </div>
+                                        </div> <!-- End of form group for select occupancy list-->
+
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3">Sprinklers</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" id="sprinklers_sc2" name="sprinklers">
+                                                    <option value="typeYes" selected="">Yes</option>
+                                                    <option value="typeNo">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Activation temperature sprinklers</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="acttemp_sc2" name="Activation temperature sprinklers" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Temperature of surroundings</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="envtemp_sc2" name="Temperature of surroundings" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="areavent_sc2" name="Area" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of vent</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Height of vent" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of highest air inlet</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="higthighairinlet_sc2" name="Height of highest air inlet" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">C_i</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="ci_sc2" name="C_i" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Desired smoke free height</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Desired smoke free height" type="text" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of smoke screen</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightsmkscrn_sc2" name="Height of smoke screen" type="text" >
+                                            </div>
+                                        </div>
+                                                              
+                                    </form>
+
+                                </div><!-- End of card2 body-->
                             </div>
 
                       
@@ -360,7 +485,10 @@
                                 <div class="card-body">
                                     <p id="ug3" class="card-text">Fill up with details for compartment 3.</p>
                                     
-                                        <div class="input-group form-inline mt-2">
+                                    <!--borrow from https://www.codeply.com/go/ouF4wvC2uU-->
+                                    <form class="form" role="form" autocomplete="off">
+                                        <div class="form-group row">
+
                                             <label class="control-label col-md-3">Occupancy</label>
                                             <div class="col-md-4">
                                                 <select class="form-control" id="sc_occupancy_list3" name="compartment3 occupancy">
@@ -380,15 +508,14 @@
                                                         <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
                                                         <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
                                                         <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
-                                                    </optgroup>     
+                                                    </optgroup>    
                                                 </select>
                                             </div>
-                                        </div>
 
+                                        </div> <!-- End of form group for select occupancy list-->
 
-
-                                        <div id="sc3display" >
-                                            <div class="form-group row flex-v-center" pt-1>
+                                       
+                                        <div id="sc3display" class="form-group row flex-v-center" pt-1>
                                                             <div class="col-sm-2">
                                                                     <label for="another-input">Circumference</label>
                                                             </div>
@@ -407,19 +534,76 @@
                                                             <div class="col-sm-2">
                                                                 <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
+                                        </div> <!-- End of form group for select occupancy list-->
+
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3">Sprinklers</label>
+                                            <div class="col-md-3">
+                                                <select class="form-control" id="sprinklers_sc3" name="sprinklers">
+                                                    <option value="typeYes" selected="">Yes</option>
+                                                    <option value="typeNo">No</option>
+                                                </select>
                                             </div>
-                                        
                                         </div>
 
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Activation temperature sprinklers</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="acttemp_sc2" name="Activation temperature sprinklers" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Temperature of surroundings</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="envtemp_sc2" name="Temperature of surroundings" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="areavent_sc2" name="Area" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of vent</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Height of vent" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of highest air inlet</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="higthighairinlet_sc2" name="Height of highest air inlet" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">C_i</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="ci_sc2" name="C_i" type="text" >
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Desired smoke free height</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightvent_sc2" name="Desired smoke free height" type="text" >
+                                            </div>
+                                        </div>
 
-                                </div>
-                            </div>
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">Height of smoke screen</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="heightsmkscrn_sc2" name="Height of smoke screen" type="text" >
+                                            </div>
+                                        </div>
+                                                              
+                                    </form>
+
+                                </div> <!-- End of card3 body-->
+                            </div> <!-- End of card3-->
 
                         
                     </div>
-
-
-
 
                 </form>
 
