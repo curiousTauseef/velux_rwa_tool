@@ -261,7 +261,35 @@
                                                         <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
                                                         <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
                                                         <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
-                                                    </optgroup>    
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een hoog brandgevaar(N3)"> 
+                                                        <option value="Bakelietfabrieken">Bakelietfabrieken</option>                             
+                                                        <option value="Banden voor brandopnemers en dgl.">Banden voor brandopnemers en dgl.</option>
+                                                        <option value="Banketbakerijnen">Banketbakerijnen</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een speciaal brandgevaar(N4)"> 
+                                                        <option value="Afval en lompen(textiel)">Afval en lompen(textiel)</option>                             
+                                                        <option value="Alcohol(stokerij, magazijnen, aftrekkerijnen van">Alcohol(stokerij, magazijnen, aftrekkerijnen van</option>
+                                                        <option value="Azijnfabrieken">Azijnfabrieken</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D1)"> 
+                                                        <option value="Confectiewerkplaatsen">Confectiewerkplatsen</option>                             
+                                                        <option value="Houtverkoling">Houtverkoling</option>
+                                                        <option value="Hout(creosoteren)">Hout(creosoteren)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D2)"> 
+                                                        <option value="Vliegtuigloodsen">Vliegtuigloodsen</option>                             
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D3)"> 
+                                                        <option value="Afvalvezels(bewerken van)">Afvalvezels</option>                             
+                                                        <option value="Asfalt">Asfalt</option>
+                                                        <option value="Bandenindustrie">Bandenindustrie</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D4)"> 
+                                                        <option value="Acetyleen">Acetyleen</option>                             
+                                                        <option value="Celluloid">Celluloid</option>
+                                                        <option value="Gassen in vloeibare toestand">Gassen in vloeibare toestand</option>
+                                                    </optgroup>     
                                                 </select>
                                             </div>
 
@@ -293,7 +321,8 @@
                                         <div class="form-group row">
                                             <label class="control-label col-md-3">Sprinklers</label>
                                             <div class="col-md-3">
-                                                <select class="form-control" id="sprinklers_sc2" name="sprinklers">
+                                                <select class="form-control" id="sprinklers_sc1" name="sprinklers">
+                                                    <option value="0" selected="">-- Choose One --</option>
                                                     <option value="typeYes" selected="">Yes</option>
                                                     <option value="typeNo">No</option>
                                                 </select>
@@ -303,50 +332,50 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Activation temperature sprinklers</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="acttemp_sc2" name="Activation temperature sprinklers" type="text" >
+                                               <input class="form-control" id="acttemp_sc1" name="Activation temperature sprinklers" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Temperature of surroundings</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="envtemp_sc2" name="Temperature of surroundings" type="text" >
+                                               <input class="form-control" id="envtemp_sc1" name="Temperature of surroundings" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Area</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="areavent_sc2" name="Area" type="text" >
+                                               <input class="form-control" id="areavent_sc1" name="Area" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Height of vent</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="heightvent_sc2" name="Height of vent" type="text" >
+                                               <input class="form-control" id="heightvent_sc1" name="Height of vent" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Height of highest air inlet</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="higthighairinlet_sc2" name="Height of highest air inlet" type="text" >
+                                               <input class="form-control" id="higthighairinlet_sc1" name="Height of highest air inlet" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">C_i</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="ci_sc2" name="C_i" type="text" >
+                                               <input class="form-control" id="ci_sc1" name="C_i" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Desired smoke free height</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="heightvent_sc2" name="Desired smoke free height" type="text" >
+                                               <input class="form-control" id="heightvent_sc1" name="Desired smoke free height" type="text" >
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Height of smoke screen</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="heightsmkscrn_sc2" name="Height of smoke screen" type="text" >
+                                               <input class="form-control" id="heightsmkscrn_sc1" name="Height of smoke screen" type="text" >
                                             </div>
                                         </div>
                                                               
@@ -367,7 +396,7 @@
 
                                             <label class="control-label col-md-3">Occupancy</label>
                                             <div class="col-md-4">
-                                                <select class="form-control" id="sc_occupancy_list2" name="compartment3 occupancy">
+                                                <select class="form-control" id="sc_occupancy_list2" name="compartment2 occupancy">
                                                     <option value="base"> Select a occupancy type</option>
                                                     <optgroup label="Inrinchtingen met een lage brandbelasting(L)">
                                                         <option value="Badhuizen">Badhuizen (openbare)</option>
@@ -384,6 +413,34 @@
                                                         <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
                                                         <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
                                                         <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een hoog brandgevaar(N3)"> 
+                                                        <option value="Bakelietfabrieken">Bakelietfabrieken</option>                             
+                                                        <option value="Banden voor brandopnemers en dgl.">Banden voor brandopnemers en dgl.</option>
+                                                        <option value="Banketbakerijnen">Banketbakerijnen</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een speciaal brandgevaar(N4)"> 
+                                                        <option value="Afval en lompen(textiel)">Afval en lompen(textiel)</option>                             
+                                                        <option value="Alcohol(stokerij, magazijnen, aftrekkerijnen van">Alcohol(stokerij, magazijnen, aftrekkerijnen van</option>
+                                                        <option value="Azijnfabrieken">Azijnfabrieken</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D1)"> 
+                                                        <option value="Confectiewerkplaatsen">Confectiewerkplatsen</option>                             
+                                                        <option value="Houtverkoling">Houtverkoling</option>
+                                                        <option value="Hout(creosoteren)">Hout(creosoteren)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D2)"> 
+                                                        <option value="Vliegtuigloodsen">Vliegtuigloodsen</option>                             
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D3)"> 
+                                                        <option value="Afvalvezels(bewerken van)">Afvalvezels</option>                             
+                                                        <option value="Asfalt">Asfalt</option>
+                                                        <option value="Bandenindustrie">Bandenindustrie</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D4)"> 
+                                                        <option value="Acetyleen">Acetyleen</option>                             
+                                                        <option value="Celluloid">Celluloid</option>
+                                                        <option value="Gassen in vloeibare toestand">Gassen in vloeibare toestand</option>
                                                     </optgroup>    
                                                 </select>
                                             </div>
@@ -508,6 +565,34 @@
                                                         <option value="Accumulatorenfabrieken">Accumulatorenfabrieken</option>                             
                                                         <option value="Ammoniakfabrieken(synthetisch)">Ammoniakfabrieken(synthetisch)</option>
                                                         <option value="Asbest(fabrieken van voorwerpen)">Asbest(fabrieken van voorwerpen)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een hoog brandgevaar(N3)"> 
+                                                        <option value="Bakelietfabrieken">Bakelietfabrieken</option>                             
+                                                        <option value="Banden voor brandopnemers en dgl.">Banden voor brandopnemers en dgl.</option>
+                                                        <option value="Banketbakerijnen">Banketbakerijnen</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen met een normale brandbelasting en een speciaal brandgevaar(N4)"> 
+                                                        <option value="Afval en lompen(textiel)">Afval en lompen(textiel)</option>                             
+                                                        <option value="Alcohol(stokerij, magazijnen, aftrekkerijnen van">Alcohol(stokerij, magazijnen, aftrekkerijnen van</option>
+                                                        <option value="Azijnfabrieken">Azijnfabrieken</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D1)"> 
+                                                        <option value="Confectiewerkplaatsen">Confectiewerkplatsen</option>                             
+                                                        <option value="Houtverkoling">Houtverkoling</option>
+                                                        <option value="Hout(creosoteren)">Hout(creosoteren)</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D2)"> 
+                                                        <option value="Vliegtuigloodsen">Vliegtuigloodsen</option>                             
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D3)"> 
+                                                        <option value="Afvalvezels(bewerken van)">Afvalvezels</option>                             
+                                                        <option value="Asfalt">Asfalt</option>
+                                                        <option value="Bandenindustrie">Bandenindustrie</option>
+                                                    </optgroup>
+                                                    <optgroup label="Inrinchtingen voor het vervaardigen(D4)"> 
+                                                        <option value="Acetyleen">Acetyleen</option>                             
+                                                        <option value="Celluloid">Celluloid</option>
+                                                        <option value="Gassen in vloeibare toestand">Gassen in vloeibare toestand</option>
                                                     </optgroup>    
                                                 </select>
                                             </div>
@@ -634,8 +719,6 @@
     <script type="text/javascript" src="{% static "veluxTool/jsxgraphcore.js" %}"></script>
     
     
-    <script  type="module" src="{% static "veluxTool/jspdf.min.js" %}"></script>
-
     
     <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
 </body>
