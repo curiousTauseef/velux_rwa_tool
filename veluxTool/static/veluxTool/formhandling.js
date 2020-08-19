@@ -1,12 +1,65 @@
 $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
-    console.log("JS ready for updating HTML elements in veluxTool");
+    console.log("Updated JS ready for updating HTML elements in veluxTool");
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
     // reference to selected option
     var buildingTypeOpt = buildingType.options[buildingType.selectedIndex];
+
+    (function(API) {
+		API.textAlign = function(txt, options, x, y) {
+				options = options || {};
+				// Use the options align property to specify desired text alignment
+				// Param x will be ignored if desired text alignment is 'center'.
+				// Usage of options can easily extend the function to apply different text
+				// styles and sizes
+
+				// Get current font size
+				var fontSize = this.internal.getFontSize();
+
+				// Get page width
+				var pageWidth = this.internal.pageSize.width;
+
+				// Get the actual text's width
+				// You multiply the unit width of your string by your font size and divide
+				// by the internal scale factor. The division is necessary
+				// for the case where you use units other than 'pt' in the constructor
+				// of jsPDF.
+
+				var txtWidth = this.getStringUnitWidth(txt) * fontSize / this.internal.scaleFactor;
+
+				if (options.align === "center") {
+
+						// Calculate text's x coordinate
+						x = (pageWidth - txtWidth) / 2;
+
+				} else if (options.align === "centerAtX") { // center on X value
+
+						x = x - (txtWidth / 2);
+
+				} else if (options.align === "right") {
+
+						x = x - txtWidth;
+				}
+
+				// Draw text at x,y
+				this.text(txt, x, y);
+		};
+		/*
+		    API.textWidth = function(txt) {
+			    var fontSize = this.internal.getFontSize();
+		        return this.getStringUnitWidth(txt)*fontSize / this.internal.scaleFactor;
+		    };
+		*/
+
+		API.getLineHeight = function(txt) {
+				return this.internal.getLineHeight();
+		};
+
+    })(jsPDF.API);
+
 
 
     $(document).on('change', '#smoke_compts', () => {
@@ -173,7 +226,59 @@ $(document).ready(function () {
 
 
 
+    $('#pdfSave').click(function (event) {
+        var doc = new jsPDF();
+        //doc.text(20, 20, 'Velux tool for calculating ventilation of buildings. Your results are below!');
+        var j=30;
+        var indSelect=0;
 
+        var newLine = "\r\n";
+
+        var veluxtool_title = "Velux Tool";
+
+        doc.textAlign(veluxtool_title, {
+            align: "center"
+        }, 0, 15);
+
+        $('#calcformnew input, #calcformnew select').each(function(){
+        
+            var input = $(this);
+            var s = $(this);
+           
+            if( !(typeof input.attr('name') === 'undefined')  ){
+                
+                //if(input.tagName === 'INPUT' && input.type === 'text') {
+                if(input.is('input') && !( input.val().trim() ===("").valueOf() )  ) {
+
+                    var msg = input.attr('name') + ':   '+input.val();
+                    doc.text(20, j,  msg  );
+                    j=j+3;
+                }
+                j=j+2;
+
+                if(input.is('select')) {
+
+                    var userval = s[0].options[s[0].selectedIndex].text;
+                    var msg = input.attr('name') + ':   '+userval;
+    
+                    //doc.text(20, j,  msg  );
+
+                    if(   (parseInt(input.val()) != 0)  && !( input.val().trim() ===("base").valueOf() )  && !( input.val().trim() ===("").valueOf() ) ) {
+                            doc.text(20, j,  msg  );
+                            j=j+5;
+                    }
+             
+                }
+            }
+  
+            //j=j+1;
+            //n=n+1;
+        });
+
+        doc.save('Input.pdf'); 
+        event.preventDefault();
+
+    }); //pdfSave ends
 
         
 }); //document ready ends
