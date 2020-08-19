@@ -240,12 +240,30 @@ $(document).ready(function () {
             align: "center"
         }, 0, 15);
 
+        var compNr = 0;
+
+        //let usrSCcomp = parseInt($('#smoke_compts').val());
+
+
         $('#calcformnew input, #calcformnew select').each(function(){
         
             var input = $(this);
             var s = $(this);
            
             if( !(typeof input.attr('name') === 'undefined')  ){
+
+                //if( (input.attr('name') === 'compartment1 occupancy') || (input.attr('name') === 'compartment2 occupancy') || (input.attr('name') === 'compartment3 occupancy') ) {
+                if( (input.attr('name') === 'occupancy') && ( (compNr +1) <= parseInt($('#smoke_compts').find(":selected").text())   ) ) {
+                    compNr++;
+                    var msg = '---------------------------------------------------------------------------------';
+                    doc.text(20, j,  msg  ); 
+                    j=j+3;
+                    var msg = '                     Compartment '+ compNr +' inputs and result                    ';
+                    doc.text(20, j,  msg  ); 
+                    j=j+3;
+                }
+
+
                 
                 //if(input.tagName === 'INPUT' && input.type === 'text') {
                 if(input.is('input') && !( input.val().trim() ===("").valueOf() )  ) {
