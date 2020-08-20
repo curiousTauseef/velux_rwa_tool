@@ -349,6 +349,20 @@ $(document).ready(function () {
            document.getElementById('resultmodal').style.display = 'block';
        }
 
+      // $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
+      //console.log( parseInt($('#yankee_sc1').val().trim()) );
+      //console.log( parseFloat(document.getElementById("yankee_sc1").value) );
+
+
+       //var yankee = Math.pow(parseInt($('#yankee_sc1').val()), 1.5);
+       //console.log(yankee);
+       $('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5)+ " kg/s" );
+       //$('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * yankee + " kg/s" );
+
+       $('#presultsc2').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
+       $('#presultsc3').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
+
+       
 
         //$('calcformnew[data-novalidate=yes]').bootstrapValidate();
         //$.bootstrapValidate();
