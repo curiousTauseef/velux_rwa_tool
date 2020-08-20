@@ -12,8 +12,9 @@
     <link rel="stylesheet" type="text/css" href="{% static "veluxTool/css/jsxgraph.css" %}" />
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static "veluxTool/css/style.css" %}">
-    <!-- Bootstrap.validate CSS -->
-    <link rel="stylesheet" href="{% static "veluxTool/css/bootstrap.validate.css" %}">
+
+        <!-- Datatables CSS -->
+        <link rel="stylesheet" href="{% static "veluxTool/css/datatables.css" %}">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -738,10 +739,24 @@
                                     <div id="resultsc1" class="card">
                                     <h5 class="card-header">Compartment 1</h5>
                                         <div class="card-body" >
+        
+                                            <table id="restablsc1" class="table display" style="width:100%">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                    
+                                                    <th scope="col">Parameter Name</th>
+                                                    <th scope="col">Parameter Symbol</th>
+                                                    <th scope="col">Parameter Unit</th>
+                                                    <th scope="col">Parameter Value</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                </tbody>
+                                            </table>
+                                           
                                             
-                                            <p class="card-text" id="presultsc1">With supporting text below as a natural lead-in to additional content.</p>
-                                            
-                                        </div>
+                                        </div> <!-- End of card body -->
                                     </div>
 
                                     <div id="resultsc2" class="card">
@@ -786,7 +801,9 @@
     
     
     <script  type="text/javascript" src="{% static "veluxTool/jspdf.min.js" %}"></script>
-    <script  type="text/javascript" src="{% static "veluxTool/bootstrap.validate.js" %}"></script>
+    
+
+    <script  type="text/javascript" src="{% static "veluxTool/datatables.js" %}"></script>
 
     <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
 </body>

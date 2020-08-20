@@ -328,6 +328,15 @@ $(document).ready(function () {
 
     }); //pdfSave ends
 
+//Refer : https://datatables.net/manual/data/
+    function OutNatVents ( paramName, paramSymbol, paramUnit, paramVal ) {
+        this.paramName = paramName;
+        this.paramSymbol = paramSymbol;
+        this.paramUnit = paramUnit;
+        this.paramVal = paramVal;
+     
+
+    };
         
    $('#ventCalculation').click(function (event) {
         //updateSCResults(1,2,3);
@@ -356,11 +365,25 @@ $(document).ready(function () {
 
        //var yankee = Math.pow(parseInt($('#yankee_sc1').val()), 1.5);
        //console.log(yankee);
-       $('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5)+ " kg/s" );
+       //$('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5)+ " kg/s" );
        //$('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * yankee + " kg/s" );
 
-       $('#presultsc2').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
-       $('#presultsc3').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
+      // $('#presultsc2').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
+      // $('#presultsc3').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
+
+
+       $('#restablsc1').DataTable( {
+                data: [
+                    new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5) ),
+                    //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+                ],
+                columns: [
+                    { data: 'paramName' },
+                    { data: 'paramSymbol' },
+                    { data: 'paramUnit' },
+                    { data: 'paramVal' }
+                ]
+        } );
 
        
 
