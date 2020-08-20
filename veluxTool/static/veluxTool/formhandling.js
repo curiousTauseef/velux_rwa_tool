@@ -1,7 +1,42 @@
 $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
-    console.log("Updated JS ready for updating HTML elements in veluxTool");
+    console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation");
+
+    /*
+    bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
+        if (isValid) {
+            alert('Element pname is valid');
+        } else {
+            alert('Element pname is invalid');
+        }
+     });
+     */
+
+     /*
+    var s1 = document.getElementById("buildingType").value;
+    alert("buildingType : " + s1);
+
+    var s1Indx = document.getElementById("buildingType").selectedIndex;
+    alert("buildingType Selected Index : " + s1Indx);
+
+    var s1OptsBoolean = document.getElementById("buildingType").options[0].selected;
+    alert("buildingType Boolean for option 0 : " + s1OptsBoolean);
+
+    var s1OptsBoolean = document.getElementById("buildingType").options[1].selected;
+    alert("buildingType Boolean for option 1 : " + s1OptsBoolean);
+
+    
+     /*
+
+    var s2 = document.getElementById("buildingClass").value;
+    alert("buildingClass" + s2);
+    var s3 = document.getElementById("nrLayers").value;
+    alert("nrLayers" + s3);
+    var s4 = document.getElementById("smoke_compts").value;
+    alert("smoke_compts" + s4);
+    */
+
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -80,10 +115,14 @@ $(document).ready(function () {
        for(let i=1;i<=3;i++) {
            if(n >= i){
                $('#labelug'+i).css("display", "block");
+               $('#resultsc'+i).css("display", "block");
+
            }
            else{
                console.log("making smoke compartment hidden",i);
                $('#labelug'+i).css("display", "none");
+               $('#resultsc'+i).css("display", "none");
+
            }
         }
     }
@@ -224,35 +263,28 @@ $(document).ready(function () {
         updateSCResults(3);
     });
 
-
-
+    //function that is triggered when event of pdf saving button click occurs
     $('#pdfSave').click(function (event) {
         var doc = new jsPDF();
         //doc.text(20, 20, 'Velux tool for calculating ventilation of buildings. Your results are below!');
         var j=30;
         var indSelect=0;
-
         var newLine = "\r\n";
-
         var veluxtool_title = "Velux Tool";
-
         doc.textAlign(veluxtool_title, {
             align: "center"
         }, 0, 15);
-
         var compNr = 0;
-
         //let usrSCcomp = parseInt($('#smoke_compts').val());
 
-
+        //function that iterates over the form to check for either an input HTML tag or a select HTML tag
         $('#calcformnew input, #calcformnew select').each(function(){
-        
+      
             var input = $(this);
             var s = $(this);
            
             if( !(typeof input.attr('name') === 'undefined')  ){
-
-                //if( (input.attr('name') === 'compartment1 occupancy') || (input.attr('name') === 'compartment2 occupancy') || (input.attr('name') === 'compartment3 occupancy') ) {
+                //if logic to insert some nice layout separation for each new compartment details
                 if( (input.attr('name') === 'occupancy') && ( (compNr +1) <= parseInt($('#smoke_compts').find(":selected").text())   ) ) {
                     compNr++;
                     var msg = '---------------------------------------------------------------------------------';
@@ -262,9 +294,7 @@ $(document).ready(function () {
                     doc.text(20, j,  msg  ); 
                     j=j+3;
                 }
-
-
-                
+                //if logic to check that if its input element then its value is not empty
                 //if(input.tagName === 'INPUT' && input.type === 'text') {
                 if(input.is('input') && !( input.val().trim() ===("").valueOf() )  ) {
 
@@ -297,6 +327,60 @@ $(document).ready(function () {
         event.preventDefault();
 
     }); //pdfSave ends
+
+        
+   $('#ventCalculation').click(function (event) {
+        //updateSCResults(1,2,3);
+        console.log("Vent Calculation. check for min chars");
+
+        /*
+        var s4 = document.getElementById("smoke_compts").value;
+        if(s4 == 0) {alert("Please choose at least one smoke compartment");}
+        if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");}
+        */
+
+       var scnmbr = parseInt($('#smoke_compts').val());
+       console.log("# of result bodies");
+       console.log(scnmbr);
+       if(scnmbr==0){
+           document.getElementById('resultmodal').style.display = 'none';
+       }
+       else {
+           document.getElementById('resultmodal').style.display = 'block';
+       }
+
+
+        //$('calcformnew[data-novalidate=yes]').bootstrapValidate();
+        //$.bootstrapValidate();
+
+
+        /*
+
+        bootstrapValidate('#smoke_compts', 'required:Please select one option', function (isValid) {
+            if (isValid) {
+                //alert('Element is valid');
+            } else {
+                //alert('Element is invalid');
+            }
+         });
+
+         bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
+            if (isValid) {
+                //alert('Element is valid');
+            } else {
+                alert('Element pname is invalid. Kindly check !');
+            }
+         });
+         */
+         
+        console.log("smoke_compts validated");
+        
+
+
+
+    }); //ventCalculation ends
+    
+    
 
         
 }); //document ready ends

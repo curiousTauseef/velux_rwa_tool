@@ -12,12 +12,18 @@
     <link rel="stylesheet" type="text/css" href="{% static "veluxTool/css/jsxgraph.css" %}" />
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="{% static "veluxTool/css/style.css" %}">
+    <!-- Bootstrap.validate CSS -->
+    <link rel="stylesheet" href="{% static "veluxTool/css/bootstrap.validate.css" %}">
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script src="http://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+
+    
 
     <style>
         #box_licenseText { display: none; }
@@ -168,7 +174,7 @@
             <div class="main-small">This app currently only works for devices where width > 1000 px.</div>
             <div id="main">
 
-                <form class="form-horizontal" class="needs-validation" novalidate id="calcformnew" method="POST"  action='.'> <!-- check if validation is needed via javascript cf. index.js line 486, I changed calc-form to calcform to overcome this for now -->
+                <form class="form-horizontal" class="needs-validation" data-validate="yes" id="calcformnew" method="POST"  action='.'> <!-- check if validation is needed via javascript cf. index.js line 486, I changed calc-form to calcform to overcome this for now -->
                
                     <h2>Inputs</h2>
 
@@ -177,7 +183,8 @@
                             <div class="help-tip" tabindex="0" role="button" href="javascript:void(0);" data-trigger="hover focus" data-toggle="popover" data-placement="top" data-content="Enter a project name in the box">?</div>    
                         </label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" id="pname" name="ProjectName" placeholder="project name (e.g., django)">                                
+                            <input type="text" class="form-control" id="pname" name="ProjectName" placeholder="project name (e.g., django)" required>  
+                            
                         </div>
                     </div>
 
@@ -222,12 +229,13 @@
                     <div class="input-group form-inline mt-2">
                         <label class="control-label col-md-3"># Smoke compartments</label>
                         <div class="col-md-3">
-                            <select class="form-control" id="smoke_compts" name="smoke_compts">
-                                <option value="0" selected="">-- Choose One --</option>                                 
+                            <select class="form-control" id="smoke_compts" name="smoke_compts" required>
+                                <option value="0" selected="">Please select</option>
                                 <option value="1" >1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                             </select>
+
                         </div>
                     </div>
 
@@ -699,9 +707,13 @@
                     <h2 class="mt-5 pt-3">Options</h2>
 
                     <div class="text-center mt-5">
-                        <button id="ventCalculation" type="submit" class="btn btn-primary">Show vent details</button>
+                        
+                        <!-- Button trigger modal -->
+                        <button id="ventCalculation" type="button" class="btn btn-primary" data-toggle="modal" data-target="#scResultsModal">
+                            Show vent details
+                        </button>
 
-                        <button id="pdfSave" type="submit" class="btn btn-primary">Save results(PDF)</button>
+                        <button id="pdfSave" class="btn btn-primary">Save results(PDF)</button>
                         
                     </div>
 
@@ -710,7 +722,59 @@
 
                     <div id="submit-success" class="alert alert-success mt-3" style="display:none;">Thank you. Your inputs have been submitted. Results will be sent to you by e-mail.</div>
                 
-            </div>  
+                    <!-- Modal -->
+                    <div class="modal fade" id="scResultsModal" tabindex="-1" role="dialog" aria-labelledby="scResultsModalTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="scResultsModalTitle">Results</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            
+                            <div id="resultmodal">
+                                    <div id="resultsc1" class="card">
+                                    <h5 class="card-header">Compartment 1</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Special title treatment</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+
+                                    <div id="resultsc2" class="card">
+                                    <h5 class="card-header">Compartment 2</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Special title treatment</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+
+                                    <div id="resultsc3" class="card">
+                                    <h5 class="card-header">Compartment 3</h5>
+                                        <div class="card-body">
+                                            <h5 class="card-title">Special title treatment</h5>
+                                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                                        </div>
+                                    </div>
+                            </div>
+
+                        </div> <!-- End of modal body -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+
+            </div>  <!-- End of main -->
         </div>
     </div>
 
@@ -721,7 +785,9 @@
     <script type="text/javascript" src="{% static "veluxTool/jsxgraphcore.js" %}"></script>
     
     
-    <script  type="module" src="{% static "veluxTool/jspdf.min.js" %}"></script>
+    <script  type="text/javascript" src="{% static "veluxTool/jspdf.min.js" %}"></script>
+    <script  type="text/javascript" src="{% static "veluxTool/bootstrap.validate.js" %}"></script>
+
     <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
 </body>
 
