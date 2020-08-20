@@ -371,6 +371,7 @@ $(document).ready(function () {
       // $('#presultsc2').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
       // $('#presultsc3').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
 
+      //restablsc1 + sc1display + yankee_sc1
 
        $('#restablsc1').DataTable( {
                 data: [
@@ -383,6 +384,32 @@ $(document).ready(function () {
                     { data: 'paramUnit' },
                     { data: 'paramVal' }
                 ]
+        } );
+
+        $('#restablsc2').DataTable( {
+            data: [
+                new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+2+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc2').val()), 1.5) ),
+                //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+            ],
+            columns: [
+                { data: 'paramName' },
+                { data: 'paramSymbol' },
+                { data: 'paramUnit' },
+                { data: 'paramVal' }
+            ]
+        } );
+
+        $('#restablsc3').DataTable( {
+            data: [
+                new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+3+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc3').val()), 1.5) ),
+                //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+            ],
+            columns: [
+                { data: 'paramName' },
+                { data: 'paramSymbol' },
+                { data: 'paramUnit' },
+                { data: 'paramVal' }
+            ]
         } );
 
        
