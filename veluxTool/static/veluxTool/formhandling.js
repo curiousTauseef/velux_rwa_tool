@@ -1,7 +1,9 @@
+
+
 $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
-    console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation");
+    console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop");
 
     /*
     bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
@@ -36,7 +38,6 @@ $(document).ready(function () {
     var s4 = document.getElementById("smoke_compts").value;
     alert("smoke_compts" + s4);
     */
-
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -94,7 +95,6 @@ $(document).ready(function () {
 		};
 
     })(jsPDF.API);
-
 
 
     $(document).on('change', '#smoke_compts', () => {
@@ -237,7 +237,7 @@ $(document).ready(function () {
         }
     }
 
-    /*
+    /* If needed button click can update the area parameters for fire source
    $('#ventCalculation').click(function (event) {
         updateSCResults(1,2,3);
 
@@ -337,16 +337,113 @@ $(document).ready(function () {
      
 
     };
+
+    function chckInletHeight() {
+            var Hi = arguments[0];
+            var yankee  = arguments[1];
+            if(Hi > yankee - 0.5) {alert("Check inlet height : Inlet Height must be <= (Y- 0.5)m");}
+     }
+
+     function chckSmScHeight() {
+        var HSC = arguments[0];
+        var yankee  = arguments[1];
+        if(HSC > yankee - 0.5) {alert("Check  height smoke screen from floor: Height must be <= (Y- 0.5)m");}
+     }
+
+
+
+     function updateModalSmokeCompts() {
+        let n = parseInt($('#smoke_compts').val());
+
+        for(let i=1;i<=3;i++) {
+            if(n >= i){
+
+                //Now do the calculations
+
+
+
+                var Mf = 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5);
+                var thetaC = ( (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
+                var db = parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val());
+                var Tc = 273 + parseFloat($('#envtemp_sc'+i).val()) + (  (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
+                console.log("Solve for Tc");
+                console.log(Tc);
+                var Tcsquared= Math.pow(Tc, 2);
+                var T0= 273 + parseFloat($('#envtemp_sc'+i).val());
+                var N=Tcsquared + T0*Tc;
+                var D=2 * 9.81 * db * thetaC * T0;
+                var Aisquared=Math.pow(parseFloat($('#areainlet_sc'+i).val()), 2);
+                var Cisquared=Math.pow(parseFloat($('#ci_sc'+i).val()), 2);
+
+                var C1 = Mf/1.225;
+                var C2 = Tcsquared ; //Tcsquared
+                var C3 = ((T0*Tc)/(Aisquared*Cisquared));
+                var C4 = 2 * 9.81 * db * thetaC * T0;
+                console.log("Values of four coefficients:");
+                console.log(C1);
+                console.log(C2);
+                console.log(C3);
+                console.log(C4);
+        
+                var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
+
+
+                document.getElementById('resultmodal').style.display = 'block';
+
+                //Now update the modals for each smoke compartment
+                    // Refer : https://datatables.net/manual/data/
+                    $('#restablsc'+i).DataTable( {
+                        data: [
+                            new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
+                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
+                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
+                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+
+                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
+                            //new OutNatVents( "Rookmassastroom", "Wf", "m", 36),
+                            new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) ),
+
+                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            //get via formula : tc = t0 + thetaC
+                            
+                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", parseInt($('#envtemp_sc'+i).val()) + (   (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ) / (0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) )   ) ),
+                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv),
+
+
+                        // new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5) ),
+                            //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+                        ],
+                        columns: [
+                            { data: 'paramName' },
+                            { data: 'paramSymbol' },
+                            { data: 'paramUnit' },
+                            { data: 'paramVal' }
+                        ]
+                    } );
+
+            }
+            else{ //zero smoke compartments
+
+
+            }
+        }//end of for to update modal
+    }
+
         
    $('#ventCalculation').click(function (event) {
         //updateSCResults(1,2,3);
         console.log("Vent Calculation. check for min chars");
+        chckInletHeight(document.getElementById("higthighairinlet_sc1").value,document.getElementById("yankee_sc1").value);
+        chckSmScHeight(document.getElementById("heightsmkscrn_sc1").value,document.getElementById("yankee_sc1").value);
 
-        /*
+        
         var s4 = document.getElementById("smoke_compts").value;
         if(s4 == 0) {alert("Please choose at least one smoke compartment");}
         if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");}
-        */
+        
 
        var scnmbr = parseInt($('#smoke_compts').val());
        console.log("# of result bodies");
@@ -355,41 +452,35 @@ $(document).ready(function () {
            document.getElementById('resultmodal').style.display = 'none';
        }
        else {
+        //document.getElementById('resultmodal').style.display = 'block';
+
+
+             updateModalSmokeCompts();
+
+
            document.getElementById('resultmodal').style.display = 'block';
-       }
-
-      // $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
-      //console.log( parseInt($('#yankee_sc1').val().trim()) );
-      //console.log( parseFloat(document.getElementById("yankee_sc1").value) );
+       }//scnmbr !=0 else part ends
 
 
-       //var yankee = Math.pow(parseInt($('#yankee_sc1').val()), 1.5);
-       //console.log(yankee);
-       //$('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5)+ " kg/s" );
-       //$('#presultsc1').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * yankee + " kg/s" );
 
-      // $('#presultsc2').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
-      // $('#presultsc3').html("Rookmassastroom : " + 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) + " kg/s" );
-
-      //restablsc1 + sc1display + yankee_sc1
-
-       $('#restablsc1').DataTable( {
-                data: [
-                    new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc1').val()), 1.5) ),
-                    //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
-                ],
-                columns: [
-                    { data: 'paramName' },
-                    { data: 'paramSymbol' },
-                    { data: 'paramUnit' },
-                    { data: 'paramVal' }
-                ]
-        } );
-
+/*
         $('#restablsc2').DataTable( {
             data: [
-                new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+2+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc2').val()), 1.5) ),
-                //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+                new OutNatVents( "Hoogte", "Hc", "m", 6),
+                new OutNatVents( "Rookvrije hoogte", "Y", "m", 3),
+                new OutNatVents( "Omgevingstemperatuur", "t0", "°C", 15),
+                new OutNatVents( "Omtrek", "Wf", "m", 36),
+                new OutNatVents( "Oppervlakte", "Af", "m²", 3),
+                new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+
+                new OutNatVents( "Dikte rooklaag", "db", "m", 3.0),
+                //new OutNatVents( "Rookmassastroom", "Wf", "m", 36),
+                new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+2+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc2').val()), 1.5) ),
+                new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+2+"display :input[name=Fire-Area]").val()) ),
+
+                new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", 32),
+                new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                new OutNatVents( "Oppervlakte van de rookluiken", "Av", "m²", 250114),
             ],
             columns: [
                 { data: 'paramName' },
@@ -401,8 +492,21 @@ $(document).ready(function () {
 
         $('#restablsc3').DataTable( {
             data: [
-                new OutNatVents( "Rookmassastroom", "Hc", "m", 0.188 * parseInt($("#sc"+3+"display :input[name=Circumference]").val()) * Math.pow(parseInt($('#yankee_sc3').val()), 1.5) ),
-                //new Employee( "Garrett Winters", "Director", "$5,300", "Edinburgh" )
+                new OutNatVents( "Hoogte", "Hc", "m", 6),
+                new OutNatVents( "Rookvrije hoogte", "Y", "m", 3),
+                new OutNatVents( "Omgevingstemperatuur", "t0", "°C", 15),
+                new OutNatVents( "Omtrek", "Wf", "m", 36),
+                new OutNatVents( "Oppervlakte", "Af", "m²", 3),
+                new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+
+                new OutNatVents( "Dikte rooklaag", "db", "m", 3.0),
+                //new OutNatVents( "Rookmassastroom", "Wf", "m", 36),
+                new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+3+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc3').val()), 1.5) ),
+                new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+3+"display :input[name=Fire-Area]").val()) ),
+
+                new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", 32),
+                new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                new OutNatVents( "Oppervlakte van de rookluiken", "Av", "m²", 250114),
             ],
             columns: [
                 { data: 'paramName' },
@@ -412,8 +516,56 @@ $(document).ready(function () {
             ]
         } );
 
-       
+        //https://stackoverflow.com/questions/4514302/javascript-equation-solver-library
+        
+        var Mf = 0.188 * parseFloat($("#sc"+1+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc1').val()), 1.5);
+        var thetaC = ( (0.8 * 250 * parseFloat($("#sc"+1+"display :input[name=Fire-Area]").val()) )/ Mf);
+        var db = parseFloat($('#heightvent_sc1').val()) - parseFloat($('#yankee_sc1').val());
+        var Tc = 273 + parseFloat($('#envtemp_sc1').val()) + (  (0.8 * 250 * parseFloat($("#sc"+1+"display :input[name=Fire-Area]").val()) )/ Mf);
+        console.log("Solve for Tc");
+        console.log(Tc);
+        var Tcsquared= Math.pow(Tc, 2);
+        var T0= 273 + parseFloat($('#envtemp_sc1').val());
+        var N=Tcsquared + T0*Tc;
+        var D=2 * 9.81 * db * thetaC * T0;
+        var Aisquared=Math.pow(parseFloat($('#areainlet_sc1').val()), 2);
+        var Cisquared=Math.pow(parseFloat($('#ci_sc1').val()), 2);
 
+        console.log("Dump the variables obtained from user: ");
+        console.log("Mf");
+        console.log(Mf);
+        console.log("Tcsquared");
+        console.log(Tcsquared);
+        console.log("Aisquared");
+        console.log(Aisquared);
+        console.log("Cisquared");
+        console.log(Cisquared);
+        console.log("T0");
+        console.log(T0);
+        console.log("Tc");
+        console.log(Tc);
+        console.log("D");
+        console.log(D);
+
+        var C1 = Mf/1.225;
+        var C2 = Tcsquared ; //Tcsquared
+        var C3 = ((T0*Tc)/(Aisquared*Cisquared));
+        var C4 = 2 * 9.81 * db * thetaC * T0;
+        console.log("Values of four coefficients:");
+        console.log(C1);
+        console.log(C2);
+        console.log(C3);
+        console.log(C4);
+
+        var tauSoln3 = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
+
+        console.log(C1);
+        console.log(Math.sqrt(C2/(C4-C3*(C1^2))));
+        
+        console.log("AvCv solution");
+        console.log(tauSoln3);
+        */
+ 
         //$('calcformnew[data-novalidate=yes]').bootstrapValidate();
         //$.bootstrapValidate();
 
@@ -438,13 +590,9 @@ $(document).ready(function () {
          */
          
         console.log("smoke_compts validated");
-        
-
-
+  
 
     }); //ventCalculation ends
-    
-    
-
+ 
         
 }); //document ready ends

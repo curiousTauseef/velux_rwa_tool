@@ -347,19 +347,19 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Temperature of surroundings</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="envtemp_sc1" name="Temperature of surroundings" type="text" >
+                                               <input class="form-control" id="envtemp_sc1" data-var="envtemp_sc1" name="Temperature of surroundings" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <label class="col-md-3 col-form-label form-control-label">Inlet Area</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="areavent_sc1" name="Area" type="text" >
+                                               <input class="form-control" id="areainlet_sc1" name="InletArea" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Height of vent</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="heightvent_sc1" name="Height of vent" type="text" >
+                                               <input class="form-control" id="heightvent_sc1" data-var="heightvent_sc1" name="Height of vent" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -377,7 +377,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Desired smoke free height</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="yankee_sc1" name="Desired smoke free height" type="text" >
+                                               <input class="form-control" id="yankee_sc1" data-var="yankee_sc1" name="Desired smoke free height" type="text" >
                                             </div>
                                         </div>
 
@@ -385,6 +385,13 @@
                                             <label class="col-md-3 col-form-label form-control-label">Height of smoke screen</label>
                                             <div class="col-md-3">
                                                <input class="form-control" id="heightsmkscrn_sc1" name="Height of smoke screen" type="text" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-md-3 col-form-label form-control-label">AiCi</label>
+                                            <div class="col-md-3">
+                                               <input class="form-control" id="AiCi_sc1" name="AiCi" type="text" >
                                             </div>
                                         </div>
                                                               
@@ -503,9 +510,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <label class="col-md-3 col-form-label form-control-label">Inlet Area</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="areavent_sc2" name="Area" type="text" >
+                                               <input class="form-control" id="areainlet_sc2" name="InletArea" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -656,9 +663,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-md-3 col-form-label form-control-label">Area</label>
+                                            <label class="col-md-3 col-form-label form-control-label">Inlet Area</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="areavent_sc3" name="Area" type="text" >
+                                               <input class="form-control" id="areainlet_sc3" name="InletArea" type="text" >
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -821,18 +828,17 @@
        
     <script type="text/javascript" src="{% static "veluxTool/jsxgraphcore.js" %}"></script>
     
-    
+    <!-- Library to generate pdf from HTML elements -->
     <script  type="text/javascript" src="{% static "veluxTool/jspdf.min.js" %}"></script>
     
-
+    <!-- Library to create and populate table for the vent calculation display -->
     <script  type="text/javascript" src="{% static "veluxTool/datatables.js" %}"></script>
 
     <script  type="text/javascript" src="{% static "veluxTool/bootstrap-validate.js" %}"></script>
 
-
-
-
     <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
+
+
 </body>
 
 </html>
