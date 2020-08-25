@@ -341,7 +341,10 @@ $(document).ready(function () {
     function chckInletHeight() {
             var Hi = arguments[0];
             var yankee  = arguments[1];
-            if(Hi > yankee - 0.5) {alert("Check inlet height : Inlet Height must be <= (Y- 0.5)m");}
+            if(Hi > yankee - 0.5) 
+                {alert("Check inlet height : Inlet Height must be <= (Y- 0.5)m"); return "failure";}
+            else
+               return "success";
      }
 
      function chckSmScHeight() {
@@ -354,6 +357,9 @@ $(document).ready(function () {
 
      function updateModalSmokeCompts() {
         let n = parseInt($('#smoke_compts').val());
+        //$('#restablsc'+1).DataTable().clear();
+        //$('#restablsc'+2).DataTable().clear();
+        //$('#restablsc'+3).DataTable().clear();
 
         for(let i=1;i<=3;i++) {
             if(n >= i){
@@ -388,11 +394,17 @@ $(document).ready(function () {
                 var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
 
 
-                document.getElementById('resultmodal').style.display = 'block';
+                //document.getElementById('resultmodal').style.display = 'block';
+                //$('#restablsc'+i).DataTable().clear();
 
+
+                console.log("Update datatables for compartment");
+                //if($.fn.dataTable.isDataTable( '#restablsc'+i )){$('#restablsc'+i).DataTable.destroy();}
                 //Now update the modals for each smoke compartment
                     // Refer : https://datatables.net/manual/data/
                     $('#restablsc'+i).DataTable( {
+                        //retrieve: true,
+                        destroy: true,
                         data: [
                             new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
                             new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
@@ -436,7 +448,7 @@ $(document).ready(function () {
    $('#ventCalculation').click(function (event) {
         //updateSCResults(1,2,3);
         console.log("Vent Calculation. check for min chars");
-        chckInletHeight(document.getElementById("higthighairinlet_sc1").value,document.getElementById("yankee_sc1").value);
+        if((chckInletHeight(document.getElementById("higthighairinlet_sc1").value,document.getElementById("yankee_sc1").value)) === "failure"){return "heightCheckFail";};
         chckSmScHeight(document.getElementById("heightsmkscrn_sc1").value,document.getElementById("yankee_sc1").value);
 
         
