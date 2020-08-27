@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
-    console.log("Test height checks");
+    console.log("Test pname with bootstrap validate2");
     /*
     bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
         if (isValid) {
@@ -337,10 +337,24 @@ $(document).ready(function () {
      
 
     };
+    // If the length of the element's string is 0 then display helper message 
+   function requiredInputCheck(inputtx) 
+   {
+     if (inputtx.val().length == 0)
+      { 
+         //alert("message");  	
+         alert("Missing required input : " + inputtx.attr('name'));
+         window.event.stopPropagation()
+         return false; 
+      }  	
+      return true; 
+    }
 
     function chckInletHeight() {
             var Hi = arguments[0];
             var yankee  = arguments[1];
+            console.log(Hi);
+            console.log(yankee);
             if(Hi > yankee - 0.5) 
                 {alert("Check inlet height : Inlet Height must be <= (Y- 0.5)m"); return -1;}
             else
@@ -348,10 +362,16 @@ $(document).ready(function () {
      }
 
      function chckSmScHeight() {
+         console.log("chckSmScHeight");
         var HSC = arguments[0];
+
+
+
         var yankee  = arguments[1];
+        console.log(HSC);
+        console.log(yankee);
         if(HSC > yankee - 0.5) 
-            {alert("Check smoke screen height : smoke screen height must be <= (Y- 0.5)m"); return -1;}
+            {console.log("chckSmScHeightfail");alert("Check smoke screen height : smoke screen height must be <= (Y- 0.5)m"); return -1;}
         else
             return 0;
      }
@@ -361,7 +381,19 @@ $(document).ready(function () {
         console.log("Vent Calculation.");
         event = event || window.event;
 
-        if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");event.stopPropagation();return;}
+        //if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");event.stopPropagation();return;}
+        bootstrapValidate('#pname', 'required:Please enter a string for project name');
+        /*
+        bootstrapValidate('#pname', 'required:Please enter a string for project name', function (isValid) {
+            if (isValid) {
+                alert('Element is valid');
+            } else {
+                alert('Element is invalid');
+            }
+         });
+         */
+
+         requiredInputCheck($('#pname'));
 
         //var s4 = document.getElementById("smoke_compts").value;
 
@@ -382,6 +414,7 @@ $(document).ready(function () {
                 event.stopPropagation();
                 return;
                 }
+                else{console.log("Air inlet height check pass ! Now check sc");}
 
                 console.log("Perform Smoke screen check");
 
