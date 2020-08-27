@@ -4,7 +4,7 @@ $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
-    console.log("Test pname with bootstrap validate2");
+    console.log("Test buttons with datatables, try to get prenext 1");
     /*
     bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
         if (isValid) {
@@ -263,6 +263,21 @@ $(document).ready(function () {
         updateSCResults(3);
     });
 
+        // If the length of the element's string is 0 then display helper message 
+   function requiredEmptyInputCheck(inputtx) 
+   {
+     //if (inputtx.val().length == 0)
+     if (inputtx.value.length == 0)
+      { 
+         //alert("message");  	
+         //alert("Missing required input : " + inputtx.attr('name'));
+         alert("Missing required input : " + inputtx.getAttribute('name'));
+         window.event.stopPropagation()
+         return -2; 
+      }  	
+      return 0; 
+    }
+
     //function that is triggered when event of pdf saving button click occurs
     $('#pdfSave').click(function (event) {
         var doc = new jsPDF();
@@ -328,6 +343,23 @@ $(document).ready(function () {
 
     }); //pdfSave ends
 
+
+/*
+//https://github.com/olifolkerd/tabulator/issues/666
+    $('#resultpdfSave').click(function() {
+
+
+        var elem = $("#restablsc1");
+        var doc = new jsPDF('l', 'pt'); //set document to landscape, better for most tables
+        //var res = doc.autoTableHtmlToJson(elem);
+        var res = doc.autoTableHtmlToJson(elem[0]);
+        doc.autoTable(res.columns, res.data, { 
+            //additional autotable options go in here - see website for details
+        })
+        doc.save('myPDF.pdf');
+    });
+    */
+
 //Refer : https://datatables.net/manual/data/
     function OutNatVents ( paramName, paramSymbol, paramUnit, paramVal ) {
         this.paramName = paramName;
@@ -337,18 +369,7 @@ $(document).ready(function () {
      
 
     };
-    // If the length of the element's string is 0 then display helper message 
-   function requiredInputCheck(inputtx) 
-   {
-     if (inputtx.val().length == 0)
-      { 
-         //alert("message");  	
-         alert("Missing required input : " + inputtx.attr('name'));
-         window.event.stopPropagation()
-         return false; 
-      }  	
-      return true; 
-    }
+
 
     function chckInletHeight() {
             var Hi = arguments[0];
@@ -382,20 +403,8 @@ $(document).ready(function () {
         event = event || window.event;
 
         //if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");event.stopPropagation();return;}
-        bootstrapValidate('#pname', 'required:Please enter a string for project name');
-        /*
-        bootstrapValidate('#pname', 'required:Please enter a string for project name', function (isValid) {
-            if (isValid) {
-                alert('Element is valid');
-            } else {
-                alert('Element is invalid');
-            }
-         });
-         */
-
-         requiredInputCheck($('#pname'));
-
-        //var s4 = document.getElementById("smoke_compts").value;
+        //bootstrapValidate('#pname', 'required:Please enter a string for project name');
+        requiredEmptyInputCheck(document.getElementById("pname"));
 
         //Get the number of smoke compartments selected by user in scnmbr
         var scnmbr = parseInt($('#smoke_compts').val());
@@ -407,29 +416,78 @@ $(document).ready(function () {
         for(let i=1;i<=3;i++) {
             console.log("Perform height checks");
             if(scnmbr >= i){
-                console.log("Perform Air inlet check");
 
-                if((chckInletHeight(document.getElementById("higthighairinlet_sc"+i).value,document.getElementById("yankee_sc"+i).value)) !== 0)
-                {console.log("Air inlet height check fail !");
+               console.log("Perform Air inlet check");
+               var sc_occ = $("#sc_occupancy_list"+i);
+               if(   (parseInt(sc_occ.val()) == 0)  || ( sc_occ.val().trim() ===("base").valueOf() )  || ( sc_occ.val().trim() ===("").valueOf() ) ) {
+                console.log("sc occupancy not chosen !");
+                alert("occupancy not chosen for compartment " + i);
                 event.stopPropagation();
                 return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('envtemp_sc'+i)) !== 0) {
+                console.log("Temperature of surroundings empty !");
+                event.stopPropagation();
+                return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('areainlet_sc'+i)) !== 0) {
+                console.log("Inlet Area empty !");
+                event.stopPropagation();
+                return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('heightvent_sc'+i)) !== 0) {
+                console.log("Height of vent empty !");
+                event.stopPropagation();
+                return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('higthighairinlet_sc'+i)) !== 0) {
+                    console.log("Air inlet height empty !");
+                    event.stopPropagation();
+                    return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('ci_sc'+i)) !== 0) {
+                console.log("Height of vent empty !");
+                event.stopPropagation();
+                return;
+               }
+
+               if(requiredEmptyInputCheck(document.getElementById('yankee_sc'+i)) !== 0) {
+                    console.log("Smoke free (Yankee) height empty !");
+                    event.stopPropagation();
+                    return;
+               }
+
+                if(requiredEmptyInputCheck(document.getElementById('heightsmkscrn_sc'+i)) !== 0) {
+                    console.log("Yankee inlet height empty !");
+                    event.stopPropagation();
+                    return;
                 }
-                else{console.log("Air inlet height check pass ! Now check sc");}
+
+                if((chckInletHeight(document.getElementById("higthighairinlet_sc"+i).value,document.getElementById("yankee_sc"+i).value)) !== 0) {
+                    console.log("Air inlet height check fail !");
+                    event.stopPropagation();
+                    return;
+                }
+                else {
+                    console.log("Air inlet height check pass ! Now check sc");
+                }
 
                 console.log("Perform Smoke screen check");
 
-                if((chckSmScHeight(document.getElementById("heightsmkscrn_sc"+i).value,document.getElementById("yankee_sc"+i).value)) !== 0)
-                {console.log("Smoke screen height check fail !");
-                event.stopPropagation();
-                return;
+                if((chckSmScHeight(document.getElementById("heightsmkscrn_sc"+i).value,document.getElementById("yankee_sc"+i).value)) !== 0) {
+                    console.log("Smoke screen height check fail !");
+                    event.stopPropagation();
+                    return;
                 }
-
 
             }
         } //for loop to perform height checks for each smoke compartment height inputs
-     
-        
-
+    
 
        if(scnmbr==0){
            document.getElementById('resultmodal').style.display = 'none';
@@ -439,38 +497,10 @@ $(document).ready(function () {
             updateModalSmokeCompts();
             document.getElementById('resultmodal').style.display = 'block';
        }//scnmbr !=0 else part ends
-
-
-
- 
-        //$('calcformnew[data-novalidate=yes]').bootstrapValidate();
-        //$.bootstrapValidate();
-
-
-        /*
-
-        bootstrapValidate('#smoke_compts', 'required:Please select one option', function (isValid) {
-            if (isValid) {
-                //alert('Element is valid');
-            } else {
-                //alert('Element is invalid');
-            }
-         });
-
-         bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
-            if (isValid) {
-                //alert('Element is valid');
-            } else {
-                alert('Element pname is invalid. Kindly check !');
-            }
-         });
-         */
-         
+   
         console.log("smoke_compts validated");
-  
 
     }); //ventCalculation ends
-
 
     function updateModalSmokeCompts() {
         let n = parseInt($('#smoke_compts').val());
@@ -516,9 +546,20 @@ $(document).ready(function () {
                 //if($.fn.dataTable.isDataTable( '#restablsc'+i )){$('#restablsc'+i).DataTable.destroy();}
                 //Now update the modals for each smoke compartment
                     // Refer : https://datatables.net/manual/data/
+                    // https://datatables.net/manual/tech-notes/3
+                    //https://datatables.net/extensions/buttons/examples/html5/pdfPage.html
                     $('#restablsc'+i).DataTable( {
                         //retrieve: true,
                         destroy: true,
+                        dom: 'Bfrtip',
+                        buttons: [
+                            {
+                                extend: 'pdfHtml5',
+                                title : "Results for smoke compartment"+i,
+                                orientation: 'landscape',
+                                pageSize: 'LEGAL'
+                            }
+                        ],
                         data: [
                             new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
                             new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
@@ -540,7 +581,8 @@ $(document).ready(function () {
                             { data: 'paramUnit' },
                             { data: 'paramVal' }
                         ]
-                    } );
+
+                    } ); // end of DataTable
 
             }
             else{ //zero smoke compartments

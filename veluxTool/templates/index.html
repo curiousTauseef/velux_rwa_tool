@@ -15,6 +15,9 @@
 
         <!-- Datatables CSS -->
         <link rel="stylesheet" href="{% static "veluxTool/css/datatables.css" %}">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"/>
+
     <!-- Font Awesome JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
@@ -365,7 +368,7 @@
                                         <div class="form-group row">
                                             <label class="col-md-3 col-form-label form-control-label">Height of highest air inlet(metres)</label>
                                             <div class="col-md-3">
-                                               <input class="form-control" id="higthighairinlet_sc1" name="Height of highest air inlet" type="text" >
+                                               <input type="text"  class="form-control" id="higthighairinlet_sc1" name="Height of highest air inlet" placeholder="height in metres">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -805,7 +808,11 @@
                                             </table>
                                         </div>
                                     </div>
-                            </div>
+
+                                   <!--resultpdfSave--> 
+
+
+                            </div> <!-- End of result modal -->
 
                         </div> <!-- End of modal body -->
                         <div class="modal-footer">
@@ -830,11 +837,26 @@
     
     <!-- Library to generate pdf from HTML elements -->
     <script  type="text/javascript" src="{% static "veluxTool/jspdf.min.js" %}"></script>
+
+
     
     <!-- Library to create and populate table for the vent calculation display -->
     <script  type="text/javascript" src="{% static "veluxTool/datatables.js" %}"></script>
 
     <script  type="text/javascript" src="{% static "veluxTool/bootstrap-validate.js" %}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+
+    
+
+
+     
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+
+
 
     <script  type="module" src="{% static "veluxTool/formhandling.js" %}"></script>
 
