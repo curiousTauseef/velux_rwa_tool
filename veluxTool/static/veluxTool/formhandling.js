@@ -7,6 +7,8 @@ $(document).ready(function () {
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
     //console.log("Test buttons with datatables, try to get prenext 1");
     console.log("Test num library with module num in HTML");
+    //document.getElementById('storage1display').style.display = 'none';
+
     //var num = require('num');
     //var num = new CeresGlobal.Ceres();
 
@@ -253,6 +255,25 @@ $(document).ready(function () {
     //Rather than button click, user selection changes the results.
     $(document).on('change', '#sc_occupancy_list1', () => {
         console.log("chng sc1 selection");
+        var sc_occ = $("#sc_occupancy_list1");
+
+        console.log(sc_occ.val().trim());
+
+
+        //(parseInt(sc_occ.val()) == 0)  || ( sc_occ.val().trim() ===("base").valueOf() )  || ( sc_occ.val().trim() ===("").valueOf() )
+        if(sc_occ.val().trim() === ("Storage").valueOf()) {
+            document.getElementById('storage1display').style.display = 'inline-block';
+            console.log("implement logic for storage");
+
+        }
+        else {
+            document.getElementById('storage1display').style.display = 'none';
+
+
+        }
+        
+
+
         updateSCResults(1);
     });
 
@@ -541,7 +562,7 @@ $(document).ready(function () {
                 var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
 
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
-
+                var AvCvkrit = 1.4 * Math.pow(db, 2);
 
                 //document.getElementById('resultmodal').style.display = 'block';
                 //$('#restablsc'+i).DataTable().clear();
@@ -596,8 +617,10 @@ $(document).ready(function () {
                             new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", (Tc - 273).toFixed(2) ),
 
                             new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
-                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(2)),
-                            new OutNatVents( "Aerodynamische coefficient", "Av", "m²", Av.toFixed(2)),
+                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
+                            new OutNatVents( "Aerodynamische coefficient", "Av", "m²", Av.toFixed(1)),
+                            new OutNatVents( "Aerodynamische coefficient", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
+
 
                             
 

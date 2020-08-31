@@ -172,3 +172,19 @@ a.article:hover {
         margin-left: 0;
     }
 }
+
+/* ---------------------------------------------------
+    display of results of smoke compartment
+----------------------------------------------------- */
+
+#storage1display {
+    overflow: none;
+    display: inline-block;
+    vertical-align: top;
+  
+
+}
+
+.display_inlineblock {
+    display:inline-block;  
+  }
