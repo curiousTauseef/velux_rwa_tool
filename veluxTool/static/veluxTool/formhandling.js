@@ -1,10 +1,15 @@
 //This JS file handles the user behaviour for inputs and selects on the Velux web tool 
-
+//import * as presNum from './num.js';
+//import { num } from './num.js';
 $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
-    console.log("Test buttons with datatables, try to get prenext 1");
+    //console.log("Test buttons with datatables, try to get prenext 1");
+    console.log("Test num library with module num in HTML");
+    //var num = require('num');
+    //var num = new CeresGlobal.Ceres();
+
     /*
     bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
         if (isValid) {
@@ -385,9 +390,6 @@ $(document).ready(function () {
      function chckSmScHeight() {
          console.log("chckSmScHeight");
         var HSC = arguments[0];
-
-
-
         var yankee  = arguments[1];
         console.log(HSC);
         console.log(yankee);
@@ -525,6 +527,7 @@ $(document).ready(function () {
                 var Aisquared=Math.pow(parseFloat($('#areainlet_sc'+i).val()), 2);
                 var Cisquared=Math.pow(parseFloat($('#ci_sc'+i).val()), 2);
 
+
                 var C1 = Mf/1.225;
                 var C2 = Tcsquared ; //Tcsquared
                 var C3 = ((T0*Tc)/(Aisquared*Cisquared));
@@ -536,6 +539,8 @@ $(document).ready(function () {
                 console.log(C4);
         
                 var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
+
+                var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
 
 
                 //document.getElementById('resultmodal').style.display = 'block';
@@ -560,7 +565,9 @@ $(document).ready(function () {
                                 pageSize: 'LEGAL'
                             }
                         ],
+                        
                         data: [
+                            /*
                             new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
                             new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
                             new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
@@ -573,6 +580,44 @@ $(document).ready(function () {
                             new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", parseInt($('#envtemp_sc'+i).val()) + (   (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ) / (0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) )   ) ),
                             new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
                             new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv),
+                            */
+
+                           
+                            new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
+                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
+                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
+                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "Rookmassastroom", "Mf", "m", Mf.toFixed(2) ),
+
+                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", (Tc - 273).toFixed(2) ),
+
+                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(2)),
+                            new OutNatVents( "Aerodynamische coefficient", "Av", "m²", Av.toFixed(2)),
+
+                            
+
+                            /*
+                        data: [
+                            new OutNatVents( "Hoogte", "Hc", "m", num(parseFloat($('#heightvent_sc'+i).val())) ),
+                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
+                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
+                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) ),
+                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", parseInt($('#envtemp_sc'+i).val()) + (   (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ) / (0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) )   ) ),
+                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", num(AvCv)),
+                            */
+
+
 
                         ],
                         columns: [
