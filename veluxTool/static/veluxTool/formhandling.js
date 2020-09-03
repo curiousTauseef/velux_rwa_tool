@@ -50,6 +50,102 @@ $(document).ready(function () {
     var buildingType = document.getElementById('buildingType');
     // reference to selected option
     var buildingTypeOpt = buildingType.options[buildingType.selectedIndex];
+    
+    $("#stored_goodssc1").change(function()
+    {
+        console.log("stored_goodssc1");
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 1;
+        updateFireParams_Storage(compNr,category);
+    });
+       
+
+    $("#stored_goodssc2").change(function()
+    {
+        console.log("stored_goodssc2");
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 2;
+        updateFireParams_Storage(compNr,category);
+    });
+
+    $("#stored_goodssc3").change(function()
+    {
+        console.log("stored_goodssc3");
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 3;
+        updateFireParams_Storage(compNr,category);
+    });
+
+    $("#pkg_typesc1").change(function()
+    {
+        console.log("pkg_typesc1");
+        var category = Math.max(parseInt(document.getElementById("pkg_typesc1").value), parseInt(document.getElementById("stored_goodssc1").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 1;
+        updateFireParams_Storage(compNr,category);
+    });
+
+    $("#pkg_typesc2").change(function()
+    {
+        console.log("pkg_typesc2");
+        var category = Math.max(parseInt(document.getElementById("pkg_typesc2").value), parseInt(document.getElementById("stored_goodssc2").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 2;
+        updateFireParams_Storage(compNr,category);
+    });
+
+    $("#pkg_typesc3").change(function()
+    {
+        console.log("pkg_typesc3");
+        var category = Math.max(parseInt(document.getElementById("pkg_typesc3").value), parseInt(document.getElementById("stored_goodssc3").value));
+        console.log("category");
+        console.log(category);
+        var compNr = 3;
+        updateFireParams_Storage(compNr,category);
+    });
+
+
+    
+    async function wait(ms) {
+        return new Promise(resolve => {
+          setTimeout(resolve, ms);
+        });
+      }
+/*
+
+
+      async function hello() {
+          var greeting;
+        return greeting = await Promise.resolve("Hello");
+      };
+      */
+      
+      
+
+      console.log("AFter runnning async hello");
+
+
+
+/*
+    $("#pkg_typesc1").change(function()
+        {
+            var selectedValue=$(this).val().toLowerCase();
+            if(selectedValue == 1)
+            {
+                console.log("General use of inflammable packaging");
+                //$("#c104").show();
+            }
+        });
+        */
+
 
     (function(API) {
 		API.textAlign = function(txt, options, x, y) {
@@ -158,9 +254,43 @@ $(document).ready(function () {
        }
     }
 
-    function updateSCResults() {
+    
+    function getStorageGoodType(scID) {
+      console.log("getStorageGoodType");
+      console.log(scID);
+      var i;
+
+      //for(i = 0; i < arguments.length; i++) {
+        for(i = 0; i < 1; i++) {
+            let st_good_sel_val = $('#stored_goodssc'+scID).val();
+            console.log(st_good_sel_val);
+            //console.log(arguments[i]);
+            switch(st_good_sel_val) {
+                //Klein risico with Categorie 1 (L)
+                case 'sg1':
+                    return 1;
+
+                case 'sg2':
+                    return 2;
+                case 'sg3':
+                    return 3;
+                case 'sg4':
+                    return 4;
+
+
+                default:
+                  
+            }
+
+        }
+    }
+
+
+
+    function updateFireParams_Normal() {
         var i;
         console.log("update the sc fire characteristics");
+        //hello().then(alert);
 
         //for(i = 0; i < arguments.length; i++) {
         for(i = 0; i < 1; i++) {
@@ -237,6 +367,74 @@ $(document).ready(function () {
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                case 'Storage':
+                    //var x = getStorageGoodType(arguments[i]);
+                    //var getStorageGoodType(arguments[i])
+                    //var y = $('#pkg_typesc'+arguments[i]).val();
+                    //var result = Math.max(x, y);
+                    //console.log("Max");
+                    //console.log(result);
+                    //var stored_goodssc1 = 1;
+
+                    //wait 3 second for user to refresh the select for storage goods
+                    //await new Promise(resolve => setTimeout(resolve, 3000));
+                    //wait(4000);
+                    //Lets do nothing apart from setting default values for fire related parameters.
+                    //When user clicks on storage goods or package type then another event will change these default parameters
+
+                    console.log("Storage...");
+                    console.log("stored_goods");
+                    console.log(stored_goodssc1);
+
+                    //document.getElementById('sc_occupancy_list'+arguments[i]).removeEventListener("change"); 
+
+
+                    /*
+                    document.addEventListener('input', function (event) {
+                        event.stopPropagation();
+                        event.preventDefault();
+                        // Only run for #wizard select
+                        if (event.target.id !== 'stored_goodssc1') {
+                            console.log("target id is not stored_goodssc1 so return");
+                            return;
+                        }
+                        //console.log(event.target.value);
+                        console.log(event.target.options[event.target.selectedIndex]);
+                    
+                        if (event.target.value === 'sg1') {
+                            alert('Well, we waited for stored_goodssc1 and chose sg1 type.');
+                            event.stopPropagation();
+                        }
+
+                        if (event.target.value === 'sg2') {
+                            alert('Well, we waited for stored_goodssc1 and chose sg2 type.');
+                            event.stopPropagation();
+                        }
+                        if (event.target.value === 'sg3') {
+                            alert('Well, we waited for stored_goodssc1 and chose sg3 type.');
+                            event.stopPropagation();
+                        }
+                    
+
+                    
+                    }, false);
+                    */
+
+                    wait(4000);
+                    console.log("still in switch case after the wait ");
+
+                    /*
+
+                    $.when($("select#stored_goodssc1").val("base").change()).then(function() {
+                        //$("select#subcategory").val(subcategory).change();
+                        console.log("when..then logic");
+                        console.log($(this).val().toLowerCase());
+                        //var selectedValue=$(this).val().toLowerCase();
+
+                      });
+
+                      */
+
                     break;
                 default:
                   
@@ -244,49 +442,96 @@ $(document).ready(function () {
         }
     }
 
+    function updateFireParams_Storage(compNr, categoryNr) {
+        var i;
+        console.log("updateFireParams_Storage");
+        //console.log("compNr");
+        //console.log(compNr);
+        //console.log("categoryNr");
+        //console.log(categoryNr);
+
+            switch(categoryNr) {
+                //Klein risico with Categorie 1
+                case 1:
+                    console.log("case 1 hit");
+                    $("#sc"+compNr+"display :input[name=Circumference]").val('12m');
+                    $("#sc"+compNr+"display :input[name=Fire-Area]").val('9msq');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
+                    break;
+                //Klein risico with Categorie 2 
+                case 2:
+                    console.log("case 2 hit");
+                    $("#sc"+compNr+"display :input[name=Circumference]").val('18m');
+                    $("#sc"+compNr+"display :input[name=Fire-Area]").val('20msq');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('4,5 X 4,5m');
+                    break;
+                //Normal risico with Categorie 3 
+                case 3:
+                    console.log("case 3 hit");
+                    $("#sc"+compNr+"display :input[name=Circumference]").val('24m');
+                    $("#sc"+compNr+"display :input[name=Fire-Area]").val('36msq');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('6,0 X 6,0m');
+                    break;
+                //Normal risico with Categorie 4 
+                case 4:
+                    console.log("case 4 hit");
+                    $("#sc"+compNr+"display :input[name=Circumference]").val('36m');
+                    $("#sc"+compNr+"display :input[name=Fire-Area]").val('81msq');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    break;
+
+                default:
+                    console.log("default hit");
+
+                  
+            }
+        
+    }
+
     /* If needed button click can update the area parameters for fire source
    $('#ventCalculation').click(function (event) {
-        updateSCResults(1,2,3);
+        updateFireParams_Normal(1,2,3);
 
     }); //ventCalculation ends
     */
 
     //On selection of occupancy for any of the smoke compartments, results of categories are to be displayed.
     //Rather than button click, user selection changes the results.
-    $(document).on('change', '#sc_occupancy_list1', () => {
+    $(document).on('change', '#sc_occupancy_list1', (event) => {
+        event.stopPropagation();
         console.log("chng sc1 selection");
         var sc_occ = $("#sc_occupancy_list1");
-
-        console.log(sc_occ.val().trim());
-
-
-        //(parseInt(sc_occ.val()) == 0)  || ( sc_occ.val().trim() ===("base").valueOf() )  || ( sc_occ.val().trim() ===("").valueOf() )
         if(sc_occ.val().trim() === ("Storage").valueOf()) {
             document.getElementById('storage1display').style.display = 'inline-block';
-            console.log("implement logic for storage");
-
         }
         else {
             document.getElementById('storage1display').style.display = 'none';
-
-
         }
-        
-
-
-        updateSCResults(1);
+        updateFireParams_Normal(1);
     });
 
     $(document).on('change', '#sc_occupancy_list2', () => {
         console.log("chng sc2 selection");
-
-        updateSCResults(2);
+        var sc_occ = $("#sc_occupancy_list2");
+        if(sc_occ.val().trim() === ("Storage").valueOf()) {
+            document.getElementById('storage2display').style.display = 'inline-block';
+        }
+        else {
+            document.getElementById('storage2display').style.display = 'none';
+        }
+        updateFireParams_Normal(2);
     });
 
     $(document).on('change', '#sc_occupancy_list3', () => {
         console.log("chng sc3 selection");
-
-        updateSCResults(3);
+        var sc_occ = $("#sc_occupancy_list3");
+        if(sc_occ.val().trim() === ("Storage").valueOf()) {
+            document.getElementById('storage3display').style.display = 'inline-block';
+        }
+        else {
+            document.getElementById('storage3display').style.display = 'none';
+        }
+        updateFireParams_Normal(3);
     });
 
         // If the length of the element's string is 0 then display helper message 
@@ -369,7 +614,6 @@ $(document).ready(function () {
 
     }); //pdfSave ends
 
-
 /*
 //https://github.com/olifolkerd/tabulator/issues/666
     $('#resultpdfSave').click(function() {
@@ -395,7 +639,6 @@ $(document).ready(function () {
      
 
     };
-
 
     function chckInletHeight() {
             var Hi = arguments[0];
@@ -527,9 +770,6 @@ $(document).ready(function () {
 
     function updateModalSmokeCompts() {
         let n = parseInt($('#smoke_compts').val());
-        //$('#restablsc'+1).DataTable().clear();
-        //$('#restablsc'+2).DataTable().clear();
-        //$('#restablsc'+3).DataTable().clear();
 
         for(let i=1;i<=3;i++) {
             if(n >= i){
@@ -548,7 +788,6 @@ $(document).ready(function () {
                 var Aisquared=Math.pow(parseFloat($('#areainlet_sc'+i).val()), 2);
                 var Cisquared=Math.pow(parseFloat($('#ci_sc'+i).val()), 2);
 
-
                 var C1 = Mf/1.225;
                 var C2 = Tcsquared ; //Tcsquared
                 var C3 = ((T0*Tc)/(Aisquared*Cisquared));
@@ -558,15 +797,9 @@ $(document).ready(function () {
                 console.log(C2);
                 console.log(C3);
                 console.log(C4);
-        
                 var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
-
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
                 var AvCvkrit = 1.4 * Math.pow(db, 2);
-
-                //document.getElementById('resultmodal').style.display = 'block';
-                //$('#restablsc'+i).DataTable().clear();
-
 
                 console.log("Update datatables for compartment");
                 //if($.fn.dataTable.isDataTable( '#restablsc'+i )){$('#restablsc'+i).DataTable.destroy();}
@@ -588,22 +821,6 @@ $(document).ready(function () {
                         ],
                         
                         data: [
-                            /*
-                            new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
-                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
-                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
-                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
-                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
-                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) ),
-                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
-                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", parseInt($('#envtemp_sc'+i).val()) + (   (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ) / (0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) )   ) ),
-                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
-                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv),
-                            */
-
-                           
                             new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
                             new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
                             new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
@@ -620,27 +837,6 @@ $(document).ready(function () {
                             new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
                             new OutNatVents( "Aerodynamische coefficient", "Av", "m²", Av.toFixed(1)),
                             new OutNatVents( "Aerodynamische coefficient", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
-
-
-                            
-
-                            /*
-                        data: [
-                            new OutNatVents( "Hoogte", "Hc", "m", num(parseFloat($('#heightvent_sc'+i).val())) ),
-                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
-                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
-                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
-                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
-                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Rookmassastroom", "Mf", "m", 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) ),
-                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
-                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", parseInt($('#envtemp_sc'+i).val()) + (   (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ) / (0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5) )   ) ),
-                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
-                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", num(AvCv)),
-                            */
-
-
 
                         ],
                         columns: [

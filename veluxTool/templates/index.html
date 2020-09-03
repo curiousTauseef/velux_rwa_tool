@@ -338,47 +338,54 @@
 
                                         <div id="storage1display" class="form-group row" pt-3>
 
-
                                                             <div  class="display_inlineblock col-sm-2" style="float:left">
                                                                     <label for="another-input">Stored goods(S)</label>
                                                             </div>
                                                             <div class="display_inlineblock col-sm-2" style="float:left">
-                                                            
-
-                                                                <select class="form-control" id="stored_goods" name="stored_goods" required>
+                                                  
+                                                                <select class="form-control" id="stored_goodssc1" name="stored_goods" required>
                                                                     <option value="base"> Select a storage type</option>
                                                                         <optgroup label="(S1)">
-                                                                            <option value="Tiles">Tiles</option>
-                                                                            <option value="Textile">Textile</option>
-                                                                            <option value="Salt">Salt</option>
+                                                                            <option value="1">Tiles</option>
+                                                                            <option value="1">Textile</option>
+                                                                            <option value="1">Salt</option>
 
                                                                         </optgroup>
                                                                         <optgroup label="(S2)"> 
-                                                                            <option value="Alcohol">Alcohol</option>                             
-                                                                            <option value="Batteries">Batteries</option>
-                                                                            <option value="Clothing">Clothing</option>
-                                                                            <option value="Paper">Paper</option>
-                                                                            <option value="Toys">Toys</option>
-                                                                            <option value="Parfums">Parfums</option>
+                                                                            <option value="2">Alcohol</option>                             
+                                                                            <option value="2">Batteries</option>
+                                                                            <option value="2">Clothing</option>
+                                                                            <option value="2">Paper</option>
+                                                                            <option value="2">Toys</option>
+                                                                            <option value="2">Parfums</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S3)"> 
+                                                                            <option value="3">Tires</option>                             
+                                                                            <option value="3">Cardboard</option>
+                                                                            <option value="3">Paints</option>
+                                                                            <option value="3">Paper fibres</option>
+                                                                            <option value="3">Other combustible fibres</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S4)"> 
+                                                                            <option value="4">Fireworks</option>                             
+                                                                            <option value="4">Foamed plastics</option>
+                                                                            <option value="4">Other high fire loads(not listed above)</option>
                                                                         </optgroup>
                                                                 </select>
                                                             </div>
-
-
 
                                                             <div class="display_inlineblock col-sm-2" style="float:left">
                                                                     <label for="another-input">Packaging Type(C)</label>
                                                             </div>
                                                             <div class="display_inlineblock col-sm-2" style="float:left">
 
-                                                                <select class="form-control" id="pkg_type" name="pkg_type" required>
+                                                                <select class="form-control" id="pkg_typesc1" name="pkg_type" required>
                                                                     <option value="0" selected="">Please select</option>
                                                                     <option value="1" >General use of inflammable packaging but sometimes placed on wood pallet(C1)</option>
                                                                     <option value="2">Packaging in paper, cardboard, corrugated carboard, wood or plastic (expect for expanded (foam) plastics) also potentially with use of wood pallet(C2)</option>
                                                                     <option value="3">All other packaging types not listed in C1 or C3</option>
                                                                 </select>
                                                             </div>
-
 
                                                             <div class="col-sm-2" style="float:left">
                                                                     <label for="another-input">Storage Height</label>
@@ -525,6 +532,9 @@
                                                         <option value="Acetyleen">Acetyleen</option>                             
                                                         <option value="Celluloid">Celluloid</option>
                                                         <option value="Gassen in vloeibare toestand">Gassen in vloeibare toestand</option>
+                                                    </optgroup>
+                                                    <optgroup label="Storage"> 
+                                                        <option value="Storage">Storage</option>                             
                                                     </optgroup>    
                                                 </select>
                                             </div>
@@ -552,6 +562,67 @@
                                                                 <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
                                         </div> <!-- End of form group for select occupancy list-->
+
+                                        <div id="storage2display" class="form-group row" pt-3>
+
+                                            <div  class="display_inlineblock col-sm-2" style="float:left">
+                                                    <label for="another-input">Stored goods(S)</label>
+                                            </div>
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+
+                                                <select class="form-control" id="stored_goodssc2" name="stored_goods" required>
+                                                                    <option value="base"> Select a storage type</option>
+                                                                        <optgroup label="(S1)">
+                                                                            <option value="1">Tiles</option>
+                                                                            <option value="1">Textile</option>
+                                                                            <option value="1">Salt</option>
+
+                                                                        </optgroup>
+                                                                        <optgroup label="(S2)"> 
+                                                                            <option value="2">Alcohol</option>                             
+                                                                            <option value="2">Batteries</option>
+                                                                            <option value="2">Clothing</option>
+                                                                            <option value="2">Paper</option>
+                                                                            <option value="2">Toys</option>
+                                                                            <option value="2">Parfums</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S3)"> 
+                                                                            <option value="3">Tires</option>                             
+                                                                            <option value="3">Cardboard</option>
+                                                                            <option value="3">Paints</option>
+                                                                            <option value="3">Paper fibres</option>
+                                                                            <option value="3">Other combustible fibres</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S4)"> 
+                                                                            <option value="4">Fireworks</option>                             
+                                                                            <option value="4">Foamed plastics</option>
+                                                                            <option value="4">Other high fire loads(not listed above)</option>
+                                                                        </optgroup>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+                                                    <label for="another-input">Packaging Type(C)</label>
+                                            </div>
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+
+                                                <select class="form-control" id="pkg_typesc2" name="pkg_type" required>
+                                                                    <option value="0" selected="">Please select</option>
+                                                                    <option value="1" >General use of inflammable packaging but sometimes placed on wood pallet(C1)</option>
+                                                                    <option value="2">Packaging in paper, cardboard, corrugated carboard, wood or plastic (expect for expanded (foam) plastics) also potentially with use of wood pallet(C2)</option>
+                                                                    <option value="3">All other packaging types not listed in C1 or C3</option>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-sm-2" style="float:left">
+                                                    <label for="another-input">Storage Height</label>
+                                            </div>
+                                            <div class="col-sm-2" style="float:left">
+                                                <input type="text" name="Storage-Height" class="form-control" placeholder="Storage Height(metres)" aria-label="Storage Height" aria-describedby="btnGroupAddon">
+                                            </div>
+                                        </div> <!-- End of form group for storage inputs-->
 
 
                                         <div class="form-group row">
@@ -690,7 +761,11 @@
                                                         <option value="Acetyleen">Acetyleen</option>                             
                                                         <option value="Celluloid">Celluloid</option>
                                                         <option value="Gassen in vloeibare toestand">Gassen in vloeibare toestand</option>
-                                                    </optgroup>    
+                                                    </optgroup>
+                                                    <optgroup label="Storage"> 
+                                                        <option value="Storage">Storage</option>                             
+                                                    </optgroup>
+                                                        
                                                 </select>
                                             </div>
 
@@ -717,6 +792,68 @@
                                                                 <input type="text" name="Fire-Size" class="form-control" placeholder="Fire size" aria-label="Fire size" aria-describedby="btnGroupAddon">
                                                             </div>
                                         </div> <!-- End of form group for select occupancy list-->
+
+                                        <div id="storage3display" class="form-group row" pt-3>
+
+                                            <div  class="display_inlineblock col-sm-2" style="float:left">
+                                                    <label for="another-input">Stored goods(S)</label>
+                                            </div>
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+
+                                                <select class="form-control" id="stored_goodssc3" name="stored_goods" required>
+                                                                    <option value="base"> Select a storage type</option>
+                                                                        <optgroup label="(S1)">
+                                                                            <option value="1">Tiles</option>
+                                                                            <option value="1">Textile</option>
+                                                                            <option value="1">Salt</option>
+
+                                                                        </optgroup>
+                                                                        <optgroup label="(S2)"> 
+                                                                            <option value="2">Alcohol</option>                             
+                                                                            <option value="2">Batteries</option>
+                                                                            <option value="2">Clothing</option>
+                                                                            <option value="2">Paper</option>
+                                                                            <option value="2">Toys</option>
+                                                                            <option value="2">Parfums</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S3)"> 
+                                                                            <option value="3">Tires</option>                             
+                                                                            <option value="3">Cardboard</option>
+                                                                            <option value="3">Paints</option>
+                                                                            <option value="3">Paper fibres</option>
+                                                                            <option value="3">Other combustible fibres</option>
+                                                                        </optgroup>
+                                                                        <optgroup label="(S4)"> 
+                                                                            <option value="4">Fireworks</option>                             
+                                                                            <option value="4">Foamed plastics</option>
+                                                                            <option value="4">Other high fire loads(not listed above)</option>
+                                                                        </optgroup>
+                                                </select>
+
+                                            </div>
+
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+                                                    <label for="another-input">Packaging Type(C)</label>
+                                            </div>
+                                            <div class="display_inlineblock col-sm-2" style="float:left">
+
+                                                <select class="form-control" id="pkg_typesc3" name="pkg_type" required>
+                                                                    <option value="0" selected="">Please select</option>
+                                                                    <option value="1" >General use of inflammable packaging but sometimes placed on wood pallet(C1)</option>
+                                                                    <option value="2">Packaging in paper, cardboard, corrugated carboard, wood or plastic (expect for expanded (foam) plastics) also potentially with use of wood pallet(C2)</option>
+                                                                    <option value="3">All other packaging types not listed in C1 or C3</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-sm-2" style="float:left">
+                                                    <label for="another-input">Storage Height</label>
+                                            </div>
+                                            <div class="col-sm-2" style="float:left">
+                                                <input type="text" name="Storage-Height" class="form-control" placeholder="Storage Height(metres)" aria-label="Storage Height" aria-describedby="btnGroupAddon">
+                                            </div>
+                                        </div> <!-- End of form group for storage inputs-->
+
+
 
 
                                         <div class="form-group row">
