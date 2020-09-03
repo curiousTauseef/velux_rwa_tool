@@ -219,6 +219,7 @@ $(document).ready(function () {
            if(n >= i){
                $('#labelug'+i).css("display", "block");
                $('#resultsc'+i).css("display", "block");
+               document.getElementById('storage'+i+'display').style.display = 'none';
 
            }
            else{
