@@ -6,7 +6,10 @@ $(document).ready(function () {
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
     //console.log("Test buttons with datatables, try to get prenext 1");
-    console.log("Test num library with module num in HTML");
+    console.log("Test critical storage height alert float");
+
+    //var s1 = document.getElementById("buildingType").value;
+    //alert("buildingType : " + s1);
     //document.getElementById('storage1display').style.display = 'none';
 
     //var num = require('num');
@@ -50,101 +53,190 @@ $(document).ready(function () {
     var buildingType = document.getElementById('buildingType');
     // reference to selected option
     var buildingTypeOpt = buildingType.options[buildingType.selectedIndex];
+
+    var storageheight_critical = [4, 3, 2.1, 1.2];
     
     $("#stored_goodssc1").change(function()
     {
         console.log("stored_goodssc1");
+
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc1").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
         var category = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
         console.log("category");
         console.log(category);
         var compNr = 1;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
        
 
     $("#stored_goodssc2").change(function()
     {
         console.log("stored_goodssc2");
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc2").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
         var category = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
         console.log("category");
         console.log(category);
         var compNr = 2;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
 
     $("#stored_goodssc3").change(function()
     {
         console.log("stored_goodssc3");
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc3").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
         var category = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
         console.log("category");
         console.log(category);
         var compNr = 3;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
 
     $("#pkg_typesc1").change(function()
     {
         console.log("pkg_typesc1");
-        var category = Math.max(parseInt(document.getElementById("pkg_typesc1").value), parseInt(document.getElementById("stored_goodssc1").value));
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc1").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
         console.log("category");
         console.log(category);
         var compNr = 1;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
 
     $("#pkg_typesc2").change(function()
     {
         console.log("pkg_typesc2");
-        var category = Math.max(parseInt(document.getElementById("pkg_typesc2").value), parseInt(document.getElementById("stored_goodssc2").value));
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc2").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
         console.log("category");
         console.log(category);
         var compNr = 2;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
 
     $("#pkg_typesc3").change(function()
     {
         console.log("pkg_typesc3");
-        var category = Math.max(parseInt(document.getElementById("pkg_typesc3").value), parseInt(document.getElementById("stored_goodssc3").value));
+        //First check storage height
+        var storageheightVal = parseFloat(document.getElementById("storageheightsc3").value);
+        console.log("storageheight");
+        console.log(storageheightVal);
+
+        if(storageheightVal === "" || isNaN(storageheightVal) ) {
+            alert('Input storage height missing! Please enter storage height before checking this field...');
+            return;
+        }
+        var category = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
         console.log("category");
         console.log(category);
         var compNr = 3;
+        console.log("storageheightcritical");
+        console.log(storageheight_critical[category-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+            alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(compNr,4);
+
+
+        }
+        else {
         updateFireParams_Storage(compNr,category);
+        }
     });
-
-
     
     async function wait(ms) {
         return new Promise(resolve => {
           setTimeout(resolve, ms);
         });
       }
-/*
-
-
-      async function hello() {
-          var greeting;
-        return greeting = await Promise.resolve("Hello");
-      };
-      */
-      
-      
-
-      console.log("AFter runnning async hello");
-
-
-
-/*
-    $("#pkg_typesc1").change(function()
-        {
-            var selectedValue=$(this).val().toLowerCase();
-            if(selectedValue == 1)
-            {
-                console.log("General use of inflammable packaging");
-                //$("#c104").show();
-            }
-        });
-        */
 
 
     (function(API) {
@@ -369,26 +461,7 @@ $(document).ready(function () {
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
                 case 'Storage':
-                    //var x = getStorageGoodType(arguments[i]);
-                    //var getStorageGoodType(arguments[i])
-                    //var y = $('#pkg_typesc'+arguments[i]).val();
-                    //var result = Math.max(x, y);
-                    //console.log("Max");
-                    //console.log(result);
-                    //var stored_goodssc1 = 1;
-
-                    //wait 3 second for user to refresh the select for storage goods
-                    //await new Promise(resolve => setTimeout(resolve, 3000));
-                    //wait(4000);
-                    //Lets do nothing apart from setting default values for fire related parameters.
-                    //When user clicks on storage goods or package type then another event will change these default parameters
-
                     console.log("Storage...");
-                    console.log("stored_goods");
-                    console.log(stored_goodssc1);
-
-                    //document.getElementById('sc_occupancy_list'+arguments[i]).removeEventListener("change"); 
-
 
                     /*
                     document.addEventListener('input', function (event) {
