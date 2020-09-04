@@ -6,7 +6,7 @@ $(document).ready(function () {
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
     //console.log("Test buttons with datatables, try to get prenext 1");
-    console.log("Test critical storage height alert float");
+    console.log("Test critical storage height alert for globals in categories");
 
     //var s1 = document.getElementById("buildingType").value;
     //alert("buildingType : " + s1);
@@ -55,6 +55,57 @@ $(document).ready(function () {
     var buildingTypeOpt = buildingType.options[buildingType.selectedIndex];
 
     var storageheight_critical = [4, 3, 2.1, 1.2];
+    //var sprinkler_flag = false;
+
+    //Start with setting default categories as the one having max critical storage height
+    var category_sc1 =1;
+    var category_sc2 =1;
+    var category_sc3 =1;
+
+
+    document.getElementById('storageheightsc1').addEventListener('change', function(event){
+        var elem = event.target;
+        console.log(elem.name);
+        console.log(elem.tagName);
+        console.log(elem.type);
+        if(parseFloat(elem.value) > parseFloat(storageheight_critical[category_sc1-1])) {
+            alert('Storage height changed: height is more than maximum allowed critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(1,4);
+        }
+        else {
+           updateFireParams_Storage(1,category_sc1);
+        }
+    });
+
+    document.getElementById('storageheightsc2').addEventListener('change', function(event){
+        var elem = event.target;
+        console.log(elem.name);
+        console.log(elem.tagName);
+        console.log(elem.type);
+        if(parseFloat(elem.value) > parseFloat(storageheight_critical[category_sc2-1])) {
+            alert('Storage height changed: height is more than maximum allowed critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(2,4);
+        }
+        else {
+           updateFireParams_Storage(2,category_sc2);
+        }
+    });
+
+    document.getElementById('storageheightsc3').addEventListener('change', function(event){
+        var elem = event.target;
+        console.log(elem.name);
+        console.log(elem.tagName);
+        console.log(elem.type);
+        if(parseFloat(elem.value) > parseFloat(storageheight_critical[category_sc3-1])) {
+            alert('Storage height changed: height is more than maximum allowed critical storage height! Proceeding with calculations assuming Category 4...');
+            updateFireParams_Storage(3,4);
+        }
+        else {
+           updateFireParams_Storage(3,category_sc3);
+        }
+    });
+
+
     
     $("#stored_goodssc1").change(function()
     {
@@ -69,20 +120,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
+        category_sc1 = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc1);
         var compNr = 1;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc1-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc1-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc1);
         }
     });
        
@@ -99,20 +150,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
+        category_sc2 = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc2);
         var compNr = 2;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc2-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc2-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc2);
         }
     });
 
@@ -128,20 +179,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
+        category_sc3 = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc3);
         var compNr = 3;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc3-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc3-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc3);
         }
     });
 
@@ -157,20 +208,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
+        category_sc1 = Math.max(parseInt(document.getElementById("stored_goodssc1").value), parseInt(document.getElementById("pkg_typesc1").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc1);
         var compNr = 1;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc1-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc1-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc1);
         }
     });
 
@@ -186,20 +237,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
+        category_sc2 = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc2);
         var compNr = 2;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc2-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc2-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc2);
         }
     });
 
@@ -215,20 +266,20 @@ $(document).ready(function () {
             alert('Input storage height missing! Please enter storage height before checking this field...');
             return;
         }
-        var category = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
+        category_sc3 = Math.max(parseInt(document.getElementById("stored_goodssc3").value), parseInt(document.getElementById("pkg_typesc3").value));
         console.log("category");
-        console.log(category);
+        console.log(category_sc3);
         var compNr = 3;
         console.log("storageheightcritical");
-        console.log(storageheight_critical[category-1]);
-        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category-1])) {
+        console.log(storageheight_critical[category_sc3-1]);
+        if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc3-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
 
 
         }
         else {
-        updateFireParams_Storage(compNr,category);
+        updateFireParams_Storage(compNr,category_sc3);
         }
     });
     
@@ -346,39 +397,7 @@ $(document).ready(function () {
                // do nothing
        }
     }
-
-    
-    function getStorageGoodType(scID) {
-      console.log("getStorageGoodType");
-      console.log(scID);
-      var i;
-
-      //for(i = 0; i < arguments.length; i++) {
-        for(i = 0; i < 1; i++) {
-            let st_good_sel_val = $('#stored_goodssc'+scID).val();
-            console.log(st_good_sel_val);
-            //console.log(arguments[i]);
-            switch(st_good_sel_val) {
-                //Klein risico with Categorie 1 (L)
-                case 'sg1':
-                    return 1;
-
-                case 'sg2':
-                    return 2;
-                case 'sg3':
-                    return 3;
-                case 'sg4':
-                    return 4;
-
-
-                default:
-                  
-            }
-
-        }
-    }
-
-
+  
 
     function updateFireParams_Normal() {
         var i;
