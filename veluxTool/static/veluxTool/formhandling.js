@@ -1,53 +1,11 @@
 //This JS file handles the user behaviour for inputs and selects on the Velux web tool 
-//import * as presNum from './num.js';
-//import { num } from './num.js';
+
 $(document).ready(function () {
 
     //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
    // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
     //console.log("Test buttons with datatables, try to get prenext 1");
-    console.log("Test critical storage height alert for globals in categories");
-
-    //var s1 = document.getElementById("buildingType").value;
-    //alert("buildingType : " + s1);
-    //document.getElementById('storage1display').style.display = 'none';
-
-    //var num = require('num');
-    //var num = new CeresGlobal.Ceres();
-
-    /*
-    bootstrapValidate('#pname', 'min:5:Enter at least 5 Characters', function (isValid) {
-        if (isValid) {
-            alert('Element pname is valid');
-        } else {
-            alert('Element pname is invalid');
-        }
-     });
-     */
-
-     /*
-    var s1 = document.getElementById("buildingType").value;
-    alert("buildingType : " + s1);
-
-    var s1Indx = document.getElementById("buildingType").selectedIndex;
-    alert("buildingType Selected Index : " + s1Indx);
-
-    var s1OptsBoolean = document.getElementById("buildingType").options[0].selected;
-    alert("buildingType Boolean for option 0 : " + s1OptsBoolean);
-
-    var s1OptsBoolean = document.getElementById("buildingType").options[1].selected;
-    alert("buildingType Boolean for option 1 : " + s1OptsBoolean);
-
-    
-     /*
-
-    var s2 = document.getElementById("buildingClass").value;
-    alert("buildingClass" + s2);
-    var s3 = document.getElementById("nrLayers").value;
-    alert("nrLayers" + s3);
-    var s4 = document.getElementById("smoke_compts").value;
-    alert("smoke_compts" + s4);
-    */
+    console.log("Test sprinlker logic");
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -61,7 +19,6 @@ $(document).ready(function () {
     var category_sc1 =1;
     var category_sc2 =1;
     var category_sc3 =1;
-
 
     document.getElementById('storageheightsc1').addEventListener('change', function(event){
         var elem = event.target;
@@ -104,8 +61,6 @@ $(document).ready(function () {
            updateFireParams_Storage(3,category_sc3);
         }
     });
-
-
     
     $("#stored_goodssc1").change(function()
     {
@@ -136,7 +91,6 @@ $(document).ready(function () {
         updateFireParams_Storage(compNr,category_sc1);
         }
     });
-       
 
     $("#stored_goodssc2").change(function()
     {
@@ -402,7 +356,6 @@ $(document).ready(function () {
     function updateFireParams_Normal() {
         var i;
         console.log("update the sc fire characteristics");
-        //hello().then(alert);
 
         //for(i = 0; i < arguments.length; i++) {
         for(i = 0; i < 1; i++) {
@@ -581,12 +534,6 @@ $(document).ready(function () {
         
     }
 
-    /* If needed button click can update the area parameters for fire source
-   $('#ventCalculation').click(function (event) {
-        updateFireParams_Normal(1,2,3);
-
-    }); //ventCalculation ends
-    */
 
     //On selection of occupancy for any of the smoke compartments, results of categories are to be displayed.
     //Rather than button click, user selection changes the results.
@@ -627,7 +574,7 @@ $(document).ready(function () {
         updateFireParams_Normal(3);
     });
 
-        // If the length of the element's string is 0 then display helper message 
+   // If the length of the element's string is 0 then display helper message 
    function requiredEmptyInputCheck(inputtx) 
    {
      //if (inputtx.val().length == 0)
@@ -756,6 +703,7 @@ $(document).ready(function () {
             return 0;
      }
 
+     
    //event handler function when user clicks on button to get results of calculations     
    $('#ventCalculation').click(function (event) {
         console.log("Vent Calculation.");
@@ -763,7 +711,8 @@ $(document).ready(function () {
 
         //if(($('#pname').val().trim() ===("").valueOf() )) {alert("Please enter a string for project name");event.stopPropagation();return;}
         //bootstrapValidate('#pname', 'required:Please enter a string for project name');
-        requiredEmptyInputCheck(document.getElementById("pname"));
+        var pnameElem = document.getElementById("pname");
+        requiredEmptyInputCheck(pnameElem);
 
         //Get the number of smoke compartments selected by user in scnmbr
         var scnmbr = parseInt($('#smoke_compts').val());
@@ -868,18 +817,48 @@ $(document).ready(function () {
             if(n >= i){
 
                 //Now do the calculations
+                var pnameElem = document.getElementById("pname");
+                var t0 = parseFloat($('#envtemp_sc'+i).val());
                 var Mf = 0.188 * parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) * Math.pow(parseFloat($('#yankee_sc'+i).val()), 1.5);
+                var Qf = 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val());
                 var thetaC = ( (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
                 var db = parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val());
                 var Tc = 273 + parseFloat($('#envtemp_sc'+i).val()) + (  (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
                 console.log("Solve for Tc");
                 console.log(Tc);
                 var Tcsquared= Math.pow(Tc, 2);
-                var T0= 273 + parseFloat($('#envtemp_sc'+i).val());
+                var T0= 273 + t0;
                 var N=Tcsquared + T0*Tc;
                 var D=2 * 9.81 * db * thetaC * T0;
                 var Aisquared=Math.pow(parseFloat($('#areainlet_sc'+i).val()), 2);
                 var Cisquared=Math.pow(parseFloat($('#ci_sc'+i).val()), 2);
+
+                var sprinklerChoiceVal = document.getElementById("sprinklers_sc"+i).value;
+
+
+                //sprinklers logic
+                if(sprinklerChoiceVal === 0 || (sprinklerChoiceVal.trim() ===("typeNo").valueOf()) ){
+                    console.log("no sprinkler logic");
+           
+                }
+                else{
+                    console.log("sprinkler logic");
+                    var ts = parseFloat(document.getElementById("acttemp_sc"+i).value);
+                    Qf = 0.5 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val());
+
+
+                    if(   (Qf/Mf) > (1.5*ts -t0)  ){
+                        thetaC=1.5*ts -t0;
+                    }
+                    else{
+                        thetaC = ( (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
+
+                    }
+                    console.log("Use new thetaC and Qf");
+                    console.log(thetaC);
+                    console.log(Qf);
+
+                }
 
                 var C1 = Mf/1.225;
                 var C2 = Tcsquared ; //Tcsquared
@@ -894,6 +873,18 @@ $(document).ready(function () {
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
                 var AvCvkrit = 1.4 * Math.pow(db, 2);
 
+                category_sc2 = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
+                var Ac=parseFloat($('#areasc_sc'+i).val());
+
+                var reqSmkVents_choice1 = Math.ceil(AvCv / AvCvkrit);
+                var reqSmkVents_choice2 = Math.ceil(Ac / 400);
+                var reqSmkVents = Math.max(reqSmkVents_choice1, reqSmkVents_choice2);
+                console.log("reqSmkVents_choice1");
+                console.log(reqSmkVents_choice1);
+
+                console.log("reqSmkVents_choice2");
+                console.log(reqSmkVents_choice2);
+
                 console.log("Update datatables for compartment");
                 //if($.fn.dataTable.isDataTable( '#restablsc'+i )){$('#restablsc'+i).DataTable.destroy();}
                 //Now update the modals for each smoke compartment
@@ -907,7 +898,7 @@ $(document).ready(function () {
                         buttons: [
                             {
                                 extend: 'pdfHtml5',
-                                title : "Results for smoke compartment"+i,
+                                title : "Project:"+pnameElem.value+"_"+"Results for smoke compartment"+i,
                                 orientation: 'landscape',
                                 pageSize: 'LEGAL'
                             }
@@ -923,13 +914,15 @@ $(document).ready(function () {
                             new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
                             new OutNatVents( "Rookmassastroom", "Mf", "m", Mf.toFixed(2) ),
 
-                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", 0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", Qf ),
                             new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", (Tc - 273).toFixed(2) ),
 
                             new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
                             new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
-                            new OutNatVents( "Aerodynamische coefficient", "Av", "m²", Av.toFixed(1)),
+                            new OutNatVents( "Geometrische afvoeroppervlakte", "Av", "m²", Av.toFixed(1)),
                             new OutNatVents( "Aerodynamische coefficient", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
+                            new OutNatVents( "Aantal rookafvoerpunten", "", "", reqSmkVents),
+
 
                         ],
                         columns: [
