@@ -2,9 +2,6 @@
 
 $(document).ready(function () {
 
-    //form validation JS borrowed from https://getbootstrap.com/docs/4.3/components/forms/?#how-it-works
-   // console.log("Updated JS ready for updating HTML elements in veluxTool + minimal validation + approximate solution for AvCv loop + inlet check move down + stop propagation");
-    //console.log("Test buttons with datatables, try to get prenext 1");
     console.log("Test sprinlker logic");
 
     //Globals after DOM is ready
@@ -15,7 +12,7 @@ $(document).ready(function () {
     var storageheight_critical = [4, 3, 2.1, 1.2];
     //var sprinkler_flag = false;
 
-    //Start with setting default categories as the one having max critical storage height
+    //Start with setting default category1 as the one having max critical storage height
     var category_sc1 =1;
     var category_sc2 =1;
     var category_sc3 =1;
@@ -84,11 +81,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc1-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc1);
+            updateFireParams_Storage(compNr,category_sc1);
         }
     });
 
@@ -113,11 +108,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc2-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc2);
+            updateFireParams_Storage(compNr,category_sc2);
         }
     });
 
@@ -142,11 +135,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc3-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc3);
+            updateFireParams_Storage(compNr,category_sc3);
         }
     });
 
@@ -171,11 +162,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc1-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc1);
+            updateFireParams_Storage(compNr,category_sc1);
         }
     });
 
@@ -200,11 +189,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc2-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc2);
+            updateFireParams_Storage(compNr,category_sc2);
         }
     });
 
@@ -229,11 +216,9 @@ $(document).ready(function () {
         if(parseFloat(storageheightVal) > parseFloat(storageheight_critical[category_sc3-1])) {
             alert('Input storage height is more than critical storage height! Proceeding with calculations assuming Category 4...');
             updateFireParams_Storage(compNr,4);
-
-
         }
         else {
-        updateFireParams_Storage(compNr,category_sc3);
+            updateFireParams_Storage(compNr,category_sc3);
         }
     });
     
@@ -351,8 +336,8 @@ $(document).ready(function () {
                // do nothing
        }
     }
-  
 
+    //this function will update the fire params for categories till D4. For storage selection this function does nothing and other event handlers are activated.
     function updateFireParams_Normal() {
         var i;
         console.log("update the sc fire characteristics");
@@ -434,52 +419,8 @@ $(document).ready(function () {
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
                 case 'Storage':
                     console.log("Storage...");
-
-                    /*
-                    document.addEventListener('input', function (event) {
-                        event.stopPropagation();
-                        event.preventDefault();
-                        // Only run for #wizard select
-                        if (event.target.id !== 'stored_goodssc1') {
-                            console.log("target id is not stored_goodssc1 so return");
-                            return;
-                        }
-                        //console.log(event.target.value);
-                        console.log(event.target.options[event.target.selectedIndex]);
-                    
-                        if (event.target.value === 'sg1') {
-                            alert('Well, we waited for stored_goodssc1 and chose sg1 type.');
-                            event.stopPropagation();
-                        }
-
-                        if (event.target.value === 'sg2') {
-                            alert('Well, we waited for stored_goodssc1 and chose sg2 type.');
-                            event.stopPropagation();
-                        }
-                        if (event.target.value === 'sg3') {
-                            alert('Well, we waited for stored_goodssc1 and chose sg3 type.');
-                            event.stopPropagation();
-                        }
-                    
-
-                    
-                    }, false);
-                    */
-
                     wait(4000);
                     console.log("still in switch case after the wait ");
-
-                    /*
-
-                    $.when($("select#stored_goodssc1").val("base").change()).then(function() {
-                        //$("select#subcategory").val(subcategory).change();
-                        console.log("when..then logic");
-                        console.log($(this).val().toLowerCase());
-                        //var selectedValue=$(this).val().toLowerCase();
-
-                      });
-
-                      */
 
                     break;
                 default:
@@ -851,7 +792,7 @@ $(document).ready(function () {
                         thetaC=1.5*ts -t0;
                     }
                     else{
-                        thetaC = ( (0.8 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
+                        thetaC = ( (0.5 * 250 * parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) )/ Mf);
 
                     }
                     console.log("Use new thetaC and Qf");
