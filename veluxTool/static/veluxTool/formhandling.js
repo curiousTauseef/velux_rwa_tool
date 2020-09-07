@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    console.log("Test sprinlker logic");
+    console.log("Test with Melchior");
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -353,7 +353,7 @@ $(document).ready(function () {
                 case 'Boekerijen':
                 case 'Gevangenissen':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9msq');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9m²');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
                     break;
                 //Klein risico with Categorie 1 (N1)
@@ -361,7 +361,7 @@ $(document).ready(function () {
                 case 'Beton':
                 case 'Bewerking-tot-schuimwijn':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9msq');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9m²');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
                     break;
                 //Normal risico with Categorie 2 (N2)
@@ -369,7 +369,7 @@ $(document).ready(function () {
                 case 'Ammoniakfabrieken(synthetisch)':
                 case 'Asbest(fabrieken van voorwerpen)':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('18m');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('20msq');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('20m²');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('4,5 X 4,5m');
                     break;
                 //Normal risico with Categorie 3 (N3)
@@ -617,8 +617,6 @@ $(document).ready(function () {
         this.paramSymbol = paramSymbol;
         this.paramUnit = paramUnit;
         this.paramVal = paramVal;
-     
-
     };
 
     function chckInletHeight() {
@@ -776,7 +774,6 @@ $(document).ready(function () {
 
                 var sprinklerChoiceVal = document.getElementById("sprinklers_sc"+i).value;
 
-
                 //sprinklers logic
                 if(sprinklerChoiceVal === 0 || (sprinklerChoiceVal.trim() ===("typeNo").valueOf()) ){
                     console.log("no sprinkler logic");
@@ -813,10 +810,7 @@ $(document).ready(function () {
                 var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
                 var AvCvkrit = 1.4 * Math.pow(db, 2);
-
-                category_sc2 = Math.max(parseInt(document.getElementById("stored_goodssc2").value), parseInt(document.getElementById("pkg_typesc2").value));
                 var Ac=parseFloat($('#areasc_sc'+i).val());
-
                 var reqSmkVents_choice1 = Math.ceil(AvCv / AvCvkrit);
                 var reqSmkVents_choice2 = Math.ceil(Ac / 400);
                 var reqSmkVents = Math.max(reqSmkVents_choice1, reqSmkVents_choice2);
@@ -825,6 +819,21 @@ $(document).ready(function () {
 
                 console.log("reqSmkVents_choice2");
                 console.log(reqSmkVents_choice2);
+
+                var maxLenSingleExhaust = Math.min(3, db);
+                var minEdgeToEdgeDistTwoVents;
+
+                //edge to edge distance
+                if(AvCv > AvCvkrit ){
+                    console.log("edge to edge distance when AvCv > AvCvkrit");
+                    minEdgeToEdgeDistTwoVents = 3 * db;
+           
+                }
+                else{
+                    console.log("edge to edge distance when AvCv <= AvCvkrit");
+                    minEdgeToEdgeDistTwoVents = "Not applicable";
+                 
+                }
 
                 console.log("Update datatables for compartment");
                 //if($.fn.dataTable.isDataTable( '#restablsc'+i )){$('#restablsc'+i).DataTable.destroy();}
@@ -846,24 +855,33 @@ $(document).ready(function () {
                         ],
                         
                         data: [
-                            new OutNatVents( "Hoogte", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
-                            new OutNatVents( "Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
-                            new OutNatVents( "Omtrek", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
-                            new OutNatVents( "Oppervlakte", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
-                            new OutNatVents( "Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
-                            new OutNatVents( "Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "Rookmassastroom", "Mf", "m", Mf.toFixed(2) ),
+                            new OutNatVents( "F. Hoogte onder de zoldering", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
+                            new OutNatVents( "G. Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
+                            new OutNatVents( "E. Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
+                            new OutNatVents( "A. Omtrek brandhaard", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
+                            new OutNatVents( "B. Oppervlakte brandhaard", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
+                            new OutNatVents( "C. Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+                            new OutNatVents( "H. Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
+                            
+                            new OutNatVents( "I. Geometrische toevoeroppervlakte", "Ai", "m²", parseFloat($('#areainlet_sc'+i).val()) ),
+                            new OutNatVents( "J. Aerodynamische coefficient toevoer", "C_i", "", parseFloat($('#ci_sc'+i).val()) ),
 
-                            new OutNatVents( "Convectieve warmtestroom", "Qf", "kW", Qf ),
-                            new OutNatVents( "gemiddelde temperatuur van de rooklaag", "tc", "C", (Tc - 273).toFixed(2) ),
 
-                            new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
-                            new OutNatVents( "Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
-                            new OutNatVents( "Geometrische afvoeroppervlakte", "Av", "m²", Av.toFixed(1)),
-                            new OutNatVents( "Aerodynamische coefficient", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
-                            new OutNatVents( "Aantal rookafvoerpunten", "", "", reqSmkVents),
+                            //new OutNatVents( "K. Rookmassastroom", "Mf", "m", Mf.toFixed(2) ),
 
+                            new OutNatVents( "D. Convectieve warmtestroom", "Qf", "kW", Qf ),
+                            //new OutNatVents( "Het verschil thetaC", "ThetaC", "", thetaC ),
+
+                            new OutNatVents( "K. Gemiddelde temperatuur van de rooklaag", "tc", "°C", (Tc - 273).toFixed(2) ),
+
+                            //new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
+                            new OutNatVents( "L. Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
+                            new OutNatVents( "M. Geometrische afvoeroppervlakte", "Av", "m²", Av.toFixed(1)),
+                            //new OutNatVents( "Aerodynamische oppervlakte", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
+                            new OutNatVents( "N. Aantal rookafvoerpunten", "", "", reqSmkVents),
+                            new OutNatVents( "O. Maximale lengte van een verluchter", "", "m", maxLenSingleExhaust),
+                            //new OutNatVents( "Minimale rand tot rand afstand tussen elk afvoerpunt", "Dmin", "m", minEdgeToEdgeDistTwoVents),
+                            //new OutNatVents( "Maximale tussenafstand", "", "m", 20),
 
                         ],
                         columns: [
