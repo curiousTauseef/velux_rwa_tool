@@ -2,7 +2,9 @@
 
 $(document).ready(function () {
 
-    console.log("Test with Melchior:iterations+sprinkler logic");
+    console.log("Test with Melchior:iter");
+    var AvCvdisplay;
+    var Avdisplay;
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -773,6 +775,8 @@ $(document).ready(function () {
 
                 var sprinklerChoiceVal = document.getElementById("sprinklers_sc"+i).value;
                 
+
+                /*
                 //sprinklers logic
                 if(sprinklerChoiceVal === 0 || (sprinklerChoiceVal.trim() ===("typeNo").valueOf()) ){
                     console.log("no sprinkler logic");
@@ -795,6 +799,7 @@ $(document).ready(function () {
                     console.log(thetaC);
                     console.log(Qf);
                 }
+                */
               
                 var dbFixed = db.toFixed(2);
                 var thetaCFixed = thetaC.toFixed(2);
@@ -816,30 +821,45 @@ $(document).ready(function () {
                 var N_new;
                 var AvCv_old;
                 var delta = 1000;
+                var delta_old;
 
                 for(let i=1;i<=10;i++) {
                         if(delta >= 0.01){
                             //continue iteration
-                            //console.log("Value of AvCv_new:before iteration action");
-                            //console.log(AvCv_new);
+                            console.log("Value of AvCv_new:before iteration action");
+                            console.log(AvCv_new);
                             AvCv_old = AvCv_new;
                             N_new = Tcsquared + (Math.pow(AvCv_new/AiCi_prod, 2)) *(T0*Tc);
                             AvCv_new  = (C1)*(  Math.sqrt(N_new/D) );
                             delta = AvCv_new - AvCv_old;
-                            //console.log("Value of delta");
-                            //console.log(delta);
-                            //console.log("Value of AvCv_new");
-                            //console.log(AvCv_new);
+
+                            if(i>1){
+                                if(delta > delta_old) {
+                                    console.log("Delta did not decrease. Quit!");
+                                    AvCv_new = "Not valid input params. Please check and re-enter !";
+                                    break;
+                                }
+
+                            }
+                            console.log("Value of delta");
+                            console.log(delta);
+                            console.log("Value of AvCv_new");
+                            console.log(AvCv_new);
+                            delta_old = delta;
             
                         }
                         else{
                             //reached final value of AvCv, exit iteration
                             //console.log("Exit iteration");
-                            return;     
+                            break;     
                         }
                     }
                 // final iterated value
                 var AvCv = AvCv_new;
+                console.log("Final of AvCv_new");
+                console.log(AvCv_new);
+
+
 
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
                 var AvCvkrit = 1.4 * Math.pow(dbFixed, 2);
@@ -866,6 +886,16 @@ $(document).ready(function () {
                     console.log("edge to edge distance when AvCv <= AvCvkrit");
                     minEdgeToEdgeDistTwoVents = "Not applicable";
                  
+                }
+
+                
+                if(isNaN(AvCv)){
+                    AvCvdisplay = "Invalid. Please check the inputs !";
+                    Avdisplay = "Invalid. Please check the inputs !";
+                }
+                else {
+                    AvCvdisplay = AvCv.toFixed(1);
+                    Avdisplay = Av.toFixed(1);
                 }
 
                 console.log("Update datatables for compartment");
@@ -907,14 +937,16 @@ $(document).ready(function () {
 
                             new OutNatVents( "K. Gemiddelde temperatuur van de rooklaag", "tc", "°C", (Tc - 273).toFixed(2) ),
 
-                            //new OutNatVents( "Toevoer ratio", "AiCi/(AvCv)", "", 36),
-                            new OutNatVents( "L. Oppervlakte van de rookluiken", "AvCv", "m²", AvCv.toFixed(1)),
-                            new OutNatVents( "M. Geometrische afvoeroppervlakte", "Av", "m²", Av.toFixed(1)),
+ 
+                            new OutNatVents( "L. Oppervlakte van de rookluiken", "AvCv", "m²", AvCvdisplay),
+                            new OutNatVents( "M. Geometrische afvoeroppervlakte", "Av", "m²", Avdisplay),
                             //new OutNatVents( "Aerodynamische oppervlakte", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
                             new OutNatVents( "N. Aantal rookafvoerpunten", "", "", reqSmkVents),
                             new OutNatVents( "O. Maximale lengte van een verluchter", "", "m", maxLenSingleExhaust),
                             //new OutNatVents( "Minimale rand tot rand afstand tussen elk afvoerpunt", "Dmin", "m", minEdgeToEdgeDistTwoVents),
                             //new OutNatVents( "Maximale tussenafstand", "", "m", 20),
+
+                            
 
                         ],
                         columns: [
@@ -925,6 +957,8 @@ $(document).ready(function () {
                         ]
 
                     } ); // end of DataTable
+
+                    //$('#restablsc'+i).DataTable.rows( { order: 'applied' } ).data();
 
             }
             else{ //zero smoke compartments
