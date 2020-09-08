@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    console.log("Test with Melchior");
+    console.log("Test with Melchior:iterations+sprinkler logic");
 
     //Globals after DOM is ready
     var buildingType = document.getElementById('buildingType');
@@ -767,13 +767,12 @@ $(document).ready(function () {
                 console.log(Tc);
                 var Tcsquared= Math.pow(Tc, 2);
                 var T0= 273 + t0;
-                var N=Tcsquared + T0*Tc;
-                var D=2 * 9.81 * db * thetaC * T0;
+                //var D=2 * 9.81 * db * thetaC * T0;
                 var Aisquared=Math.pow(parseFloat($('#areainlet_sc'+i).val()), 2);
                 var Cisquared=Math.pow(parseFloat($('#ci_sc'+i).val()), 2);
 
                 var sprinklerChoiceVal = document.getElementById("sprinklers_sc"+i).value;
-
+                
                 //sprinklers logic
                 if(sprinklerChoiceVal === 0 || (sprinklerChoiceVal.trim() ===("typeNo").valueOf()) ){
                     console.log("no sprinkler logic");
@@ -795,21 +794,55 @@ $(document).ready(function () {
                     console.log("Use new thetaC and Qf");
                     console.log(thetaC);
                     console.log(Qf);
-
                 }
-
+              
+                var dbFixed = db.toFixed(2);
+                var thetaCFixed = thetaC.toFixed(2);
+                
                 var C1 = Mf/1.225;
-                var C2 = Tcsquared ; //Tcsquared
-                var C3 = ((T0*Tc)/(Aisquared*Cisquared));
-                var C4 = 2 * 9.81 * db * thetaC * T0;
-                console.log("Values of four coefficients:");
-                console.log(C1);
-                console.log(C2);
-                console.log(C3);
-                console.log(C4);
-                var AvCv = (C1)*(  Math.sqrt(C2/(C4-C3*(C1^2))) );
+                console.log("Value of thetaCFixed:");
+                console.log(thetaCFixed);
+  
+                var N=Tcsquared + T0*Tc;
+                var D=2 * 9.81 * dbFixed * thetaCFixed * T0;
+
+                var RHS_iter1 = (C1)*(  Math.sqrt(N/D) );
+                console.log("Values of RHS_iter1");
+                console.log(RHS_iter1);
+
+                var AvCv_it1 = RHS_iter1;
+                var AiCi_prod = parseFloat($('#areainlet_sc'+i).val()) * parseFloat($('#ci_sc'+i).val());
+                var AvCv_new = AvCv_it1;
+                var N_new;
+                var AvCv_old;
+                var delta = 1000;
+
+                for(let i=1;i<=10;i++) {
+                        if(delta >= 0.01){
+                            //continue iteration
+                            //console.log("Value of AvCv_new:before iteration action");
+                            //console.log(AvCv_new);
+                            AvCv_old = AvCv_new;
+                            N_new = Tcsquared + (Math.pow(AvCv_new/AiCi_prod, 2)) *(T0*Tc);
+                            AvCv_new  = (C1)*(  Math.sqrt(N_new/D) );
+                            delta = AvCv_new - AvCv_old;
+                            //console.log("Value of delta");
+                            //console.log(delta);
+                            //console.log("Value of AvCv_new");
+                            //console.log(AvCv_new);
+            
+                        }
+                        else{
+                            //reached final value of AvCv, exit iteration
+                            //console.log("Exit iteration");
+                            return;     
+                        }
+                    }
+                // final iterated value
+                var AvCv = AvCv_new;
+
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
-                var AvCvkrit = 1.4 * Math.pow(db, 2);
+                var AvCvkrit = 1.4 * Math.pow(dbFixed, 2);
                 var Ac=parseFloat($('#areasc_sc'+i).val());
                 var reqSmkVents_choice1 = Math.ceil(AvCv / AvCvkrit);
                 var reqSmkVents_choice2 = Math.ceil(Ac / 400);
@@ -820,13 +853,13 @@ $(document).ready(function () {
                 console.log("reqSmkVents_choice2");
                 console.log(reqSmkVents_choice2);
 
-                var maxLenSingleExhaust = Math.min(3, db);
+                var maxLenSingleExhaust = Math.min(3, dbFixed);
                 var minEdgeToEdgeDistTwoVents;
 
                 //edge to edge distance
                 if(AvCv > AvCvkrit ){
                     console.log("edge to edge distance when AvCv > AvCvkrit");
-                    minEdgeToEdgeDistTwoVents = 3 * db;
+                    minEdgeToEdgeDistTwoVents = 3 * dbFixed;
            
                 }
                 else{
