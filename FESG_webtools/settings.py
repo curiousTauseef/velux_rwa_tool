@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'veluxTool.apps.VeluxConfig',
     #'veluxTool',
     #'accounts.apps.AccountsConfig',
+	'require',
     'accounts',
 
 ]
@@ -145,3 +146,6 @@ GRAPH_MODELS = {
   'all_applications': True,
   'group_models': True,
 }
+
+#https://github.com/etianen/django-require
+#STATICFILES_STORAGE = require.storage.OptimizedStaticFilesStorage

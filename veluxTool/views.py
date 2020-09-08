@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.conf import settings
 
 from django.http import HttpResponse
@@ -31,29 +32,21 @@ def index(request):
     print("\nSTATIC_DIR",settings.STATIC_DIR)
     print("\nSTATIC_ROOT",settings.STATIC_ROOT)
     print("\nSTATIC_URL",settings.STATIC_URL)
+    print("\n On webtool launch, firstly we expect to reach here via GET")
+    return render(request,"index.html")
 
-    if request.method == "POST":
-        print("\n Reached via POST request on results.html")
+@ensure_csrf_cookie
+def ventCalcSave(request):
+    # request should be ajax and method should be POST.
+    if request.is_ajax and request.method == "POST":
+        print("\n Reached via POST request on ventCalcSave. Save the user inputs...")
         jsonGET = json.dumps(request.POST)
         userinputfile = open('userinput.txt', 'a')
         userinputfile.write("\n")
         userinputfile.write(jsonGET)
         userinputfile.close()
 
-        return render(request,"results.html")
-        #return render(request,"results.html",context)
-
-    else:
-        print("\n On webtool launch, firstly we expect to reach here via GET")
-        return render(request,"index.html")
- 
-
-
-    #return HttpResponse(json.dumps(request.POST), content_type="application/json")
-    # ajax_posting function
-def ajax_posting(request):
-    if request.is_ajax():
-        print("Ajax request from form caught by Django")
+    return render(request,"index.html")
 
 
         

@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    console.log("Test with Melchior:iter");
+    console.log("Test with Melchior:fesg ajax request");
     var AvCvdisplay;
     var Avdisplay;
 
@@ -356,7 +356,7 @@ $(document).ready(function () {
                 case 'Gevangenissen':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9m²');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3 X 3m');
                     break;
                 //Klein risico with Categorie 1 (N1)
                 case 'Accumulatorenstations':
@@ -364,7 +364,7 @@ $(document).ready(function () {
                 case 'Bewerking-tot-schuimwijn':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('12m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('9m²');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('3 X 3m');
                     break;
                 //Normal risico with Categorie 2 (N2)
                 case 'Accumulatorenfabrieken':
@@ -372,7 +372,7 @@ $(document).ready(function () {
                 case 'Asbest(fabrieken van voorwerpen)':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('18m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('20m²');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('4,5 X 4,5m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('4 X 4m');
                     break;
                 //Normal risico with Categorie 3 (N3)
                 case 'Bakelietfabrieken':
@@ -380,7 +380,7 @@ $(document).ready(function () {
                 case 'Banketbakerijnen':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('24m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('36msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('6,0 X 6,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('6 X 6m');
                     break;
                 //Normal risico with Categorie 4 (N4)
                 case 'Afval en lompen(textiel)':
@@ -388,7 +388,7 @@ $(document).ready(function () {
                 case 'Azijnfabrieken':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9 X 9m');
                     break;
                 //High risico with Categorie 4 (D1)
                 case 'Confectiewerkplaatsen':
@@ -396,13 +396,13 @@ $(document).ready(function () {
                 case 'Hout(creosoteren)':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9 X 9m');
                     break;
                 //High risico with Categorie 4 (D2)
                 case 'Vliegtuigloodsen':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9 X 9m');
                     break;
                 //High risico with Categorie 4 (D3)
                 case 'Afvalvezels(bewerken van)':
@@ -410,7 +410,7 @@ $(document).ready(function () {
                 case 'Bandenindustrie':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9 X 9m');
                     break;
                 //High risico with Categorie 4 (D4)
                 case 'Acetyleen':
@@ -418,7 +418,7 @@ $(document).ready(function () {
                 case 'Gassen in vloeibare toestand':
                     $("#sc"+arguments[i]+"display :input[name=Circumference]").val('36m');
                     $("#sc"+arguments[i]+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+arguments[i]+"display :input[name=Fire-Size]").val('9 X 9m');
                 case 'Storage':
                     console.log("Storage...");
                     wait(4000);
@@ -445,28 +445,28 @@ $(document).ready(function () {
                     console.log("case 1 hit");
                     $("#sc"+compNr+"display :input[name=Circumference]").val('12m');
                     $("#sc"+compNr+"display :input[name=Fire-Area]").val('9msq');
-                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('3,0 X 3,0m');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('3 X 3m');
                     break;
                 //Klein risico with Categorie 2 
                 case 2:
                     console.log("case 2 hit");
                     $("#sc"+compNr+"display :input[name=Circumference]").val('18m');
                     $("#sc"+compNr+"display :input[name=Fire-Area]").val('20msq');
-                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('4,5 X 4,5m');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('4 X 4m');
                     break;
                 //Normal risico with Categorie 3 
                 case 3:
                     console.log("case 3 hit");
                     $("#sc"+compNr+"display :input[name=Circumference]").val('24m');
                     $("#sc"+compNr+"display :input[name=Fire-Area]").val('36msq');
-                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('6,0 X 6,0m');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('6 X 6m');
                     break;
                 //Normal risico with Categorie 4 
                 case 4:
                     console.log("case 4 hit");
                     $("#sc"+compNr+"display :input[name=Circumference]").val('36m');
                     $("#sc"+compNr+"display :input[name=Fire-Area]").val('81msq');
-                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('9,0 X 9,0m');
+                    $("#sc"+compNr+"display :input[name=Fire-Size]").val('9 X 9m');
                     break;
 
                 default:
@@ -749,6 +749,52 @@ $(document).ready(function () {
    
         console.log("smoke_compts validated");
 
+        //Now let's store the form data in txt file on the django server
+        var serializedData = $('#calcformnew').serialize();
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+  
+        function csrfSafeMethod(method) {
+                    // these HTTP methods do not require CSRF protection
+                    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+     
+        var csrftoken = getCookie('csrftoken');
+        // Ajax Setup  
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+        });
+
+        $.ajax({
+            url: 'fesg_ajax_request/',
+            method: 'POST', // or another (GET), whatever you need
+            data: serializedData,
+
+            success: function (data) {        
+                // success callback
+                // you can process data returned by function from views.py
+                //alert("Your inputs are recorded !");
+            }
+        });
+
     }); //ventCalculation ends
 
     function updateModalSmokeCompts() {
@@ -918,26 +964,19 @@ $(document).ready(function () {
                         ],
                         
                         data: [
-                            new OutNatVents( "F. Hoogte onder de zoldering", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
-                            new OutNatVents( "G. Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
-                            new OutNatVents( "E. Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
                             new OutNatVents( "A. Omtrek brandhaard", "Wf", "m", parseFloat($("#sc"+i+"display :input[name=Circumference]").val()) ),
                             new OutNatVents( "B. Oppervlakte brandhaard", "Af", "m²", parseFloat($("#sc"+i+"display :input[name=Fire-Area]").val()) ),
                             new OutNatVents( "C. Warmtevermogen per oppervlakteeenheid", "qf", "kW/m²", 250),
+                            new OutNatVents( "D. Convectieve warmtestroom", "Qf", "kW", Qf ),
+                            new OutNatVents( "E. Omgevingstemperatuur", "t0", "°C", parseInt($('#envtemp_sc'+i).val()) ),
+                            new OutNatVents( "F. Hoogte onder de zoldering", "Hc", "m", parseFloat($('#heightvent_sc'+i).val()) ),
+                            new OutNatVents( "G. Rookvrije hoogte", "Y", "m", parseFloat($('#yankee_sc'+i).val()) ),
                             new OutNatVents( "H. Dikte rooklaag", "db", "m", parseFloat($('#heightvent_sc'+i).val()) - parseFloat($('#yankee_sc'+i).val()) ),
-                            
                             new OutNatVents( "I. Geometrische toevoeroppervlakte", "Ai", "m²", parseFloat($('#areainlet_sc'+i).val()) ),
                             new OutNatVents( "J. Aerodynamische coefficient toevoer", "C_i", "", parseFloat($('#ci_sc'+i).val()) ),
-
-
                             //new OutNatVents( "K. Rookmassastroom", "Mf", "m", Mf.toFixed(2) ),
-
-                            new OutNatVents( "D. Convectieve warmtestroom", "Qf", "kW", Qf ),
                             //new OutNatVents( "Het verschil thetaC", "ThetaC", "", thetaC ),
-
                             new OutNatVents( "K. Gemiddelde temperatuur van de rooklaag", "tc", "°C", (Tc - 273).toFixed(2) ),
-
- 
                             new OutNatVents( "L. Oppervlakte van de rookluiken", "AvCv", "m²", AvCvdisplay),
                             new OutNatVents( "M. Geometrische afvoeroppervlakte", "Av", "m²", Avdisplay),
                             //new OutNatVents( "Aerodynamische oppervlakte", "AvCvkrit", "m²", AvCvkrit.toFixed(1)),
@@ -945,9 +984,7 @@ $(document).ready(function () {
                             new OutNatVents( "O. Maximale lengte van een verluchter", "", "m", maxLenSingleExhaust),
                             //new OutNatVents( "Minimale rand tot rand afstand tussen elk afvoerpunt", "Dmin", "m", minEdgeToEdgeDistTwoVents),
                             //new OutNatVents( "Maximale tussenafstand", "", "m", 20),
-
-                            
-
+                       
                         ],
                         columns: [
                             { data: 'paramName' },
@@ -967,6 +1004,15 @@ $(document).ready(function () {
             }
         }//end:for loop to update modal
     } //end:updateModalSmokeCompts
+
+    /*
+    var table = $('#restablsc1').DataTable();
+    $('#restablsc'+1).on( 'order.dt', function () {
+        // This will show: "Ordering on column 1 (asc)", for example
+        var order = table.order();
+        $('#orderInfo').html( 'Ordering on column '+order[0][0]+' ('+order[0][1]+')' );
+    } );
+    */
  
         
 }); //document ready ends
