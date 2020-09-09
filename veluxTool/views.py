@@ -3,10 +3,6 @@ import json
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.conf import settings
 from django.http import HttpResponse
-#from django.views.generic import View
-#from .utils import render_to_pdf #created in step 4
-#import datetime
-#from django import template
 
 @csrf_exempt
 def index(request):
