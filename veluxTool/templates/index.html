@@ -171,7 +171,7 @@
             <div id="main">
 
                 <form class="form-horizontal" class="needs-validation" data-validate="yes" id="calcformnew" method="POST"  action='.'> <!-- check if validation is needed via javascript cf. index.js line 486, I changed calc-form to calcform to overcome this for now -->
-               
+                    {% csrf_token %}
                     <h2>Inputs</h2>
 
                     <div class="input-group form-inline mt-2">

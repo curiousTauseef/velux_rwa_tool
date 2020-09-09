@@ -905,8 +905,6 @@ $(document).ready(function () {
                 console.log("Final of AvCv_new");
                 console.log(AvCv_new);
 
-
-
                 var Av = AvCv / ( parseFloat($('#Cv_sc'+i).val()) );
                 var AvCvkrit = 1.4 * Math.pow(dbFixed, 2);
                 var Ac=parseFloat($('#areasc_sc'+i).val());
